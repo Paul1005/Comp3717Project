@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="Title Logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/titleLogo"
+        android:textStyle="normal|bold"
+        android:textSize="50sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="PLAY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonPlay"
+        android:textSize="30sp"
+        android:textStyle="normal|bold"
+        android:layout_marginBottom="28dp"
+        android:layout_above="@+id/buttonTutorial"
+        android:layout_alignRight="@+id/buttonTutorial"
+        android:layout_alignEnd="@+id/buttonTutorial"
+        android:layout_alignLeft="@+id/buttonTutorial"
+        android:layout_alignStart="@+id/buttonTutorial"
+        android:textAlignment="center" />
+
+    <Button
+        android:text="Tutorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonTutorial"
+        android:textSize="30sp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/titleLogo"
+        android:layout_alignStart="@+id/titleLogo"
+        android:layout_alignRight="@+id/titleLogo"
+        android:layout_alignEnd="@+id/titleLogo" />
+
+    <Button
+        android:text="Discoveries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/buttonDiscoveries"
+        android:textSize="30sp"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/buttonTutorial"
+        android:layout_alignLeft="@+id/buttonTutorial"
+        android:layout_alignStart="@+id/buttonTutorial"
+        android:layout_alignRight="@+id/buttonTutorial"
+        android:layout_alignEnd="@+id/buttonTutorial"
+        android:textAlignment="center" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSettings"
+        android:background="@drawable/buttonSetting64"
+        android:layout_marginRight="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="32dp" />
+</RelativeLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="a00959419.comp3717.bcit.ca.android.screenMain">
+
+    <TextView
+        android:text="PAUSED"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/titlePaused"
+        android:textSize="80sp"
+        android:textStyle="normal|bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="textStart" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="107dp"
+        android:layout_marginEnd="107dp"
+        android:id="@+id/buttonSettings"
+        android:background="@drawable/buttonSettings"
+        android:layout_alignBaseline="@+id/buttonHome"
+        android:layout_alignBottom="@+id/buttonHome"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonBack"
+        android:background="@drawable/buttonBack"
+        android:layout_alignParentTop="true" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonHome"
+        android:background="@drawable/buttonHome"
+        android:layout_below="@+id/titlePaused"
+        android:layout_toRightOf="@+id/buttonBack"
+        android:layout_toEndOf="@+id/buttonBack" />
+</RelativeLayout>

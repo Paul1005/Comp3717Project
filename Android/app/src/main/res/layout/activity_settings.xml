@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/buttonBack"
+        android:background="@drawable/buttonBack" />
+
+    <Switch
+        android:text="MUTE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switchMute"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:splitTrack="false"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:layout_below="@+id/textMasterVol"
+        android:layout_toRightOf="@+id/textMusic"
+        android:layout_toEndOf="@+id/textMusic"
+        android:layout_marginLeft="70dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:text="SETTINGS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/titleSettings"
+        android:textSize="65sp"
+        android:textAlignment="textStart"
+        android:textStyle="normal|bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="SFX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textSFX"
+        android:textSize="24sp"
+        android:layout_alignBaseline="@+id/iconAudio"
+        android:layout_alignBottom="@+id/iconAudio"
+        android:layout_alignLeft="@+id/textMasterVol"
+        android:layout_alignStart="@+id/textMasterVol" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iconAudio"
+        android:background="@drawable/AudioSmaller"
+        android:layout_toRightOf="@+id/switchMute"
+        android:layout_toEndOf="@+id/switchMute"
+        android:layout_alignTop="@+id/textMusic" />
+
+    <TextView
+        android:text="Music"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:id="@+id/textMusic"
+        android:textSize="24sp"
+        android:layout_below="@+id/titleSettings"
+        android:layout_alignLeft="@+id/textSFX"
+        android:layout_alignStart="@+id/textSFX" />
+
+    <TextView
+        android:text="Master Volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textMasterVol"
+        android:textSize="24sp"
+        android:layout_alignBottom="@+id/iconAudio"
+        android:layout_toRightOf="@+id/buttonBack"
+        android:layout_toEndOf="@+id/buttonBack" />
+
+</RelativeLayout>
