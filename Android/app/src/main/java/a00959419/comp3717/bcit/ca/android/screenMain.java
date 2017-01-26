@@ -13,10 +13,24 @@ public class screenMain extends AppCompatActivity {
         setContentView(R.layout.activity_paused);
     }
 
-    public void onButtonPlayClick(View  view){
-        Intent intent = new Intent(screenMain.this,screenDiscoveries.class);
-        startActivity(intent);
+    public void onButtonPlayClick(View view) {
+        if (view.getId() == R.id.buttonPlay) {
+            Intent play = new Intent(screenMain.this, screenPlay.class);
+            startActivity(play);
+        }
+        if (view.getId() == R.id.buttonTutorial) {
+            Intent tutorial = new Intent(screenMain.this, screenTutorial.class);
+            startActivity(tutorial);
+        }
+        if (view.getId() == R.id.buttonDiscoveries) {
+            Intent discoveries = new Intent(screenMain.this, screenDiscoveries.class);
+            startActivity(discoveries);
+        }
+        if (view.getId() == R.id.buttonSettings) {
+            Intent settings = new Intent(screenMain.this, screenSettings.class);
+            startActivity(settings);
+        }
+
+
     }
-
-
 }
