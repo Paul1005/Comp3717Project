@@ -26,7 +26,8 @@
         android:layout_alignEnd="@+id/buttonTutorial"
         android:layout_alignLeft="@+id/buttonTutorial"
         android:layout_alignStart="@+id/buttonTutorial"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:onClick="buttonPlayClick" />
 
     <Button
         android:text="Tutorial"
@@ -40,7 +41,8 @@
         android:layout_alignLeft="@+id/titleLogo"
         android:layout_alignStart="@+id/titleLogo"
         android:layout_alignRight="@+id/titleLogo"
-        android:layout_alignEnd="@+id/titleLogo" />
+        android:layout_alignEnd="@+id/titleLogo"
+        android:onClick="buttonTutorialClick" />
 
     <Button
         android:text="Discoveries"
@@ -55,17 +57,19 @@
         android:layout_alignStart="@+id/buttonTutorial"
         android:layout_alignRight="@+id/buttonTutorial"
         android:layout_alignEnd="@+id/buttonTutorial"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:onClick="buttonDiscoveriesClick" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonSettings"
-        android:background="@drawable/buttonSetting64"
+        android:background="@drawable/button_setting64"
         android:layout_marginRight="28dp"
         android:layout_marginEnd="28dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="32dp" />
+        android:layout_marginBottom="32dp"
+        android:onClick="buttonSettingsClick" />
 </RelativeLayout>

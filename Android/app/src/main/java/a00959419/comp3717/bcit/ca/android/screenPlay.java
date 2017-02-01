@@ -15,10 +15,9 @@ public class screenPlay extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
     }
-    public void onButtonPlayClick(View view) {
-        if (view.getId() == R.id.buttonPaused) {
-            Intent paused = new Intent(screenMain.this, screenPaused.class);
-            startActivity(paused);
-        }
+
+    public void buttonPauseClick(View view) {
+        Intent paused = new Intent(screenPlay.this, screenPaused.class);
+        startActivity(paused);
     }
 }

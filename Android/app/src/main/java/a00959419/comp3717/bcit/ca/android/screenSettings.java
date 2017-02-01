@@ -15,10 +15,8 @@ public class screenSettings extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
     }
-    public void onButtonPlayClick(View view) {
-        if (view.getId() == R.id.buttonPlay) {
-            Intent back = new Intent(screenMain.this, screenMain.class);
-            startActivity(back);
-        }
+
+    public void buttonBackClick(View view) {
+        finish();
     }
 }

@@ -10,13 +10,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/buttonBack"
-        android:background="@drawable/buttonBack" />
+        android:background="@drawable/button_back"
+        android:onClick="buttonBackClick" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button2"
-        android:background="@drawable/ImageDiscovery"
+        android:background="@drawable/image_discovery"
         android:layout_below="@+id/titleDiscovery"
         android:layout_centerHorizontal="true" />
 

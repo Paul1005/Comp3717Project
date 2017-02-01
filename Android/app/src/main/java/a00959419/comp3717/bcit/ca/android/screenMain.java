@@ -10,27 +10,26 @@ public class screenMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_paused);
+        setContentView(R.layout.activity_main);
     }
 
-    public void onButtonPlayClick(View view) {
-        if (view.getId() == R.id.buttonPlay) {
-            Intent play = new Intent(screenMain.this, screenPlay.class);
-            startActivity(play);
-        }
-        if (view.getId() == R.id.buttonTutorial) {
-            Intent tutorial = new Intent(screenMain.this, screenTutorial.class);
-            startActivity(tutorial);
-        }
-        if (view.getId() == R.id.buttonDiscoveries) {
-            Intent discoveries = new Intent(screenMain.this, screenDiscoveries.class);
-            startActivity(discoveries);
-        }
-        if (view.getId() == R.id.buttonSettings) {
-            Intent settings = new Intent(screenMain.this, screenSettings.class);
-            startActivity(settings);
-        }
+    public void buttonPlayClick(View view) {
+        Intent play = new Intent(screenMain.this, screenPlay.class);
+        startActivity(play);
+    }
 
+    public void buttonTutorialClick(View view) {
+        Intent tutorial = new Intent(screenMain.this, screenTutorial.class);
+        startActivity(tutorial);
+    }
 
+    public void buttonDiscoveriesClick(View view) {
+        Intent discoveries = new Intent(screenMain.this, screenDiscoveries.class);
+        startActivity(discoveries);
+    }
+
+    public void buttonSettingsClick(View view) {
+        Intent settings = new Intent(screenMain.this, screenSettings.class);
+        startActivity(settings);
     }
 }

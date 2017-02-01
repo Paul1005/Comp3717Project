@@ -16,11 +16,7 @@ public class screenDiscovery extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discovery);
     }
-    public void onButtonPlayClick(View view) {
-        if (view.getId() == R.id.buttonBack) {
-            Intent discoveries = new Intent(screenDiscovery.this, screenDiscoveries.class);
-            startActivity(discoveries);
-        }
-
+    public void buttonBackClick(View view) {
+        finish();
     }
 }

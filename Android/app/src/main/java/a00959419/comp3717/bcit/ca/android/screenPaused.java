@@ -15,21 +15,19 @@ public class screenPaused extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paused);
     }
-    public void onButtonPlayClick(View view) {
-        if (view.getId() == R.id.buttonBack) {
-            Intent back = new Intent(screenPaused.this, screenPlay.class);
-            startActivity(back);
-        }
-        if (view.getId() == R.id.buttonHome) {
-            Intent main = new Intent(screenPaused.this, screenMain.class);
-            startActivity(main);
-        }
 
-        if (view.getId() == R.id.buttonSettings) {
-            Intent settings = new Intent(screenPaused.this, screenSettings.class);
-            startActivity(settings);
-        }
+    public void buttonBackClick(View view) {
+        finish();
+    }
 
+    public void buttonSettingsClick(View view) {
+        Intent settings = new Intent(screenPaused.this, screenSettings.class);
+        startActivity(settings);
+    }
 
+    public void buttonHomeClick(View view) {
+        Intent home = new Intent(screenPaused.this, screenMain.class);
+        home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(home);
     }
 }

@@ -27,26 +27,29 @@
         android:layout_marginRight="107dp"
         android:layout_marginEnd="107dp"
         android:id="@+id/buttonSettings"
-        android:background="@drawable/buttonSettings"
+        android:background="@drawable/button_settings"
         android:layout_alignBaseline="@+id/buttonHome"
         android:layout_alignBottom="@+id/buttonHome"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="buttonSettingsClick" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonBack"
-        android:background="@drawable/buttonBack"
-        android:layout_alignParentTop="true" />
+        android:background="@drawable/button_back"
+        android:layout_alignParentTop="true"
+        android:onClick="buttonBackClick" />
 
     <Button
         android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonHome"
-        android:background="@drawable/buttonHome"
+        android:background="@drawable/button_home"
         android:layout_below="@+id/titlePaused"
         android:layout_toRightOf="@+id/buttonBack"
-        android:layout_toEndOf="@+id/buttonBack" />
+        android:layout_toEndOf="@+id/buttonBack"
+        android:onClick="buttonHomeClick" />
 </RelativeLayout>
