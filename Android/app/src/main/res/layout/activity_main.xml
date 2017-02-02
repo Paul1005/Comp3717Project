@@ -9,8 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/titleLogo"
-        android:textStyle="normal|bold"
+        android:textStyle="normal|bold|italic"
         android:textSize="50sp"
+        android:textColor="#f0f"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -28,7 +29,8 @@
         android:layout_alignLeft="@+id/buttonTutorial"
         android:layout_alignStart="@+id/buttonTutorial"
         android:textAlignment="center"
-        android:onClick="buttonPlayClick" />
+        android:onClick="buttonPlayClick"
+        android:textColor="#f00"/>
 
     <Button
         android:text="Tutorial"
@@ -43,7 +45,8 @@
         android:layout_alignStart="@+id/titleLogo"
         android:layout_alignRight="@+id/titleLogo"
         android:layout_alignEnd="@+id/titleLogo"
-        android:onClick="buttonTutorialClick" />
+        android:onClick="buttonTutorialClick"
+        android:textColor="#080"/>
 
     <Button
         android:text="Discoveries"
@@ -59,7 +62,8 @@
         android:layout_alignRight="@+id/buttonTutorial"
         android:layout_alignEnd="@+id/buttonTutorial"
         android:textAlignment="center"
-        android:onClick="buttonDiscoveriesClick" />
+        android:onClick="buttonDiscoveriesClick"
+        android:textColor="#00f"/>
 
     <Button
         android:layout_width="wrap_content"
