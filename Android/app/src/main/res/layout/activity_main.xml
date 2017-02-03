@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/title_background">
+    android:background="@drawable/title_background"
+    android:screenOrientation="portrait">
 
     <TextView
         android:text="Vegan Zilla"
@@ -16,7 +17,6 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="PLAY"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonPlay"
@@ -30,10 +30,10 @@
         android:layout_alignStart="@+id/buttonTutorial"
         android:textAlignment="center"
         android:onClick="buttonPlayClick"
-        android:textColor="#f00"/>
+        android:textColor="#f00"
+        android:background="@drawable/button_play_1" />
 
     <Button
-        android:text="Tutorial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonTutorial"
@@ -46,10 +46,10 @@
         android:layout_alignRight="@+id/titleLogo"
         android:layout_alignEnd="@+id/titleLogo"
         android:onClick="buttonTutorialClick"
-        android:textColor="#080"/>
+        android:textColor="#080"
+        android:background="@drawable/button_tutorial_1" />
 
     <Button
-        android:text="Discoveries"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -63,7 +63,8 @@
         android:layout_alignEnd="@+id/buttonTutorial"
         android:textAlignment="center"
         android:onClick="buttonDiscoveriesClick"
-        android:textColor="#00f"/>
+        android:textColor="#00f"
+        android:background="@drawable/button_discoveries_1" />
 
     <Button
         android:layout_width="wrap_content"
