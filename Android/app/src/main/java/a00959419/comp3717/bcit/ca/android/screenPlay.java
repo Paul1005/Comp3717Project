@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.app.Activity;
 
 /**
  * Created by Kunlaya on 2017-01-26.
