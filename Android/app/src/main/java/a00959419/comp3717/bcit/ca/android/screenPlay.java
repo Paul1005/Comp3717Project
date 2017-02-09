@@ -1,17 +1,21 @@
 package a00959419.comp3717.bcit.ca.android;
 
 
+import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
+import static a00959419.comp3717.bcit.ca.android.screenMain.mediaPlayer;
+
 /**
  * Created by Kunlaya on 2017-01-26.
  */
 
-public class screenPlay extends Activity{
+public class screenPlay extends Activity {
     private move mov = new move();
     private Thread thread = new Thread(mov);
 
@@ -20,6 +24,10 @@ public class screenPlay extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
         findViewById(R.id.buttonRight).setOnTouchListener(new pressListener());
+        mediaPlayer.reset();
+        mediaPlayer = MediaPlayer.create(screenPlay.this, R.raw.game);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
     }
 
     public void buttonPauseClick(View view) {
