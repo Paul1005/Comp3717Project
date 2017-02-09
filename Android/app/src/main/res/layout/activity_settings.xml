@@ -27,6 +27,7 @@
         android:layout_toRightOf="@+id/textMusic"
         android:splitTrack="false"
         android:text="MUTE"
+        android:onClick="onMute"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:textStyle="normal|bold" />
