@@ -1,44 +1,57 @@
 package a00959419.comp3717.bcit.ca.android;
 
 import android.media.MediaPlayer;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
 
-public class screenMain extends AppCompatActivity {
+import java.io.Serializable;
 
-    public static MediaPlayer mediaPlayer;
+import static a00959419.comp3717.bcit.ca.android.ScreenSettings.mute;
+
+public class ScreenMain extends AppCompatActivity {
+
+    public static MediaPlayer soundFX;
+    public static MediaPlayer musicPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(mediaPlayer != null) {
-            mediaPlayer.reset();
+        soundFX = MediaPlayer.create(ScreenMain.this, R.raw.button_press);
+        if (musicPlayer != null) {
+            musicPlayer.stop();
         }
-        mediaPlayer = MediaPlayer.create(screenMain.this, R.raw.menu);
-        mediaPlayer.setLooping(true);
-        mediaPlayer.start();
+        musicPlayer = MediaPlayer.create(ScreenMain.this, R.raw.menu);
+        musicPlayer.setLooping(true);
+        if (!mute) {
+            musicPlayer.start();
+        }
     }
 
     public void buttonPlayClick(View view) {
-        Intent play = new Intent(screenMain.this, screenPlay.class);
+        soundFX.start();
+        Intent play = new Intent(ScreenMain.this, ScreenPlay.class);
         startActivity(play);
     }
 
     public void buttonTutorialClick(View view) {
-        Intent tutorial = new Intent(screenMain.this, screenTutorial.class);
+        soundFX.start();
+        Intent tutorial = new Intent(ScreenMain.this, ScreenTutorial.class);
         startActivity(tutorial);
     }
 
     public void buttonDiscoveriesClick(View view) {
-        Intent discoveries = new Intent(screenMain.this, screenDiscoveries.class);
+        soundFX.start();
+        Intent discoveries = new Intent(ScreenMain.this, ScreenDiscoveries.class);
         startActivity(discoveries);
     }
 
     public void buttonSettingsClick(View view) {
-        Intent settings = new Intent(screenMain.this, screenSettings.class);
+        soundFX.start();
+        Intent settings = new Intent(ScreenMain.this, ScreenSettings.class);
         startActivity(settings);
     }
 }
