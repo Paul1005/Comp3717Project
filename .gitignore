@@ -46,3 +46,4 @@ Android/gradlew.bat
 Android/settings.gradle
 Android/app/proguard-rules.pro
 Android/gradle.properties
+Android/app/app.iml
