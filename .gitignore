@@ -13,7 +13,7 @@ bin/
 gen/
 
 # Local configuration file (sdk path, etc)
-local.properties
+*.properties
 
 # Windows thumbnail db
 Thumbs.db
@@ -37,7 +37,12 @@ Android/app/build/
 #NDK
 obj/
 Android/app/app.iml
-Android/gradle/wrapper/gradle-wrapper.jar
 Android/gradlew
 *.properties
-Android/gradlew
+Android/.gradle
+Android/.idea
+Android/gradle/
+Android/gradlew.bat
+Android/settings.gradle
+Android/app/proguard-rules.pro
+Android/gradle.properties
