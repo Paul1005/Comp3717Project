@@ -5,20 +5,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
-import static a00959419.comp3717.bcit.ca.android.ScreenMain.musicPlayer;
-import static a00959419.comp3717.bcit.ca.android.ScreenMain.soundFX;
-import static a00959419.comp3717.bcit.ca.android.ScreenSettings.mute;
+import static a00959419.comp3717.bcit.ca.android.screenMain.mediaPlayer;
 
 /**
  * Created by Kunlaya on 2017-01-26.
  */
 
-public class ScreenPlay extends Activity {
+public class screenPlay extends Activity {
     private move mov = new move();
     private Thread thread = new Thread(mov);
 
@@ -27,24 +24,21 @@ public class ScreenPlay extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
         findViewById(R.id.buttonRight).setOnTouchListener(new pressListener());
-        musicPlayer.stop();
-        musicPlayer = MediaPlayer.create(ScreenPlay.this, R.raw.game);
-        musicPlayer.setLooping(true);
-        if (!mute) {
-            musicPlayer.start();
-        }
+        mediaPlayer.reset();
+        mediaPlayer = MediaPlayer.create(screenPlay.this, R.raw.game);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
     }
 
     public void buttonPauseClick(View view) {
-        soundFX.start();
-        Intent paused = new Intent(ScreenPlay.this, ScreenPaused.class);
+        Intent paused = new Intent(screenPlay.this, screenPaused.class);
         startActivity(paused);
     }
 
     class pressListener implements OnTouchListener {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            switch (event.getAction()) {
+            switch(event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     thread.start();
                     return true;
@@ -58,8 +52,8 @@ public class ScreenPlay extends Activity {
 
     class move implements Runnable {
         public void run() {
-            while (!Thread.interrupted()) {
-                findViewById(R.id.tempHouse).offsetLeftAndRight((int) (Math.random() * 3) - 1);
+            while(!Thread.interrupted()) {
+                findViewById(R.id.tempHouse).offsetLeftAndRight((int)(Math.random() * 3) - 1);
             }
         }
     }

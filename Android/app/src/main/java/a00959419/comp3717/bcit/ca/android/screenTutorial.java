@@ -9,7 +9,7 @@ import android.view.View;
  * Created by Kunlaya on 2017-01-25.
  */
 
-public class ScreenTutorial extends Activity {
+public class screenTutorial extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +17,7 @@ public class ScreenTutorial extends Activity {
     }
 
     public void buttonPauseClick(View view) {
-        Intent paused = new Intent(ScreenTutorial.this, ScreenPaused.class);
+        Intent paused = new Intent(screenTutorial.this, screenPaused.class);
         startActivity(paused);
     }
 }
