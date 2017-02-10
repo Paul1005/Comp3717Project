@@ -8,19 +8,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".screenMain">
+        <activity android:name=".ScreenMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".screenDiscoveries"></activity>
-        <activity android:name=".screenDiscovery"></activity>
-        <activity android:name=".screenPaused"></activity>
-        <activity android:name=".screenSettings"></activity>
-        <activity android:name=".screenTutorial"></activity>
-        <activity android:name=".screenPlay"></activity>
+        <activity android:name=".ScreenDiscoveries"></activity>
+        <activity android:name=".ScreenDiscovery"></activity>
+        <activity android:name=".ScreenPaused"></activity>
+        <activity android:name=".ScreenSettings"></activity>
+        <activity android:name=".ScreenTutorial"></activity>
+        <activity android:name=".ScreenPlay"></activity>
     </application>
 
 </manifest>

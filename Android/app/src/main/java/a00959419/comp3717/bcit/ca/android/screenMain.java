@@ -1,13 +1,12 @@
 package a00959419.comp3717.bcit.ca.android;
 
 import android.media.MediaPlayer;
-import android.media.AudioManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
 
-public class screenMain extends AppCompatActivity {
+public class ScreenMain extends AppCompatActivity {
 
     public static MediaPlayer mediaPlayer;
 
@@ -18,28 +17,28 @@ public class screenMain extends AppCompatActivity {
         if(mediaPlayer != null) {
             mediaPlayer.reset();
         }
-        mediaPlayer = MediaPlayer.create(screenMain.this, R.raw.menu);
+        mediaPlayer = MediaPlayer.create(ScreenMain.this, R.raw.menu);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
     }
 
     public void buttonPlayClick(View view) {
-        Intent play = new Intent(screenMain.this, screenPlay.class);
+        Intent play = new Intent(ScreenMain.this, ScreenPlay.class);
         startActivity(play);
     }
 
     public void buttonTutorialClick(View view) {
-        Intent tutorial = new Intent(screenMain.this, screenTutorial.class);
+        Intent tutorial = new Intent(ScreenMain.this, ScreenTutorial.class);
         startActivity(tutorial);
     }
 
     public void buttonDiscoveriesClick(View view) {
-        Intent discoveries = new Intent(screenMain.this, screenDiscoveries.class);
+        Intent discoveries = new Intent(ScreenMain.this, ScreenDiscoveries.class);
         startActivity(discoveries);
     }
 
     public void buttonSettingsClick(View view) {
-        Intent settings = new Intent(screenMain.this, screenSettings.class);
+        Intent settings = new Intent(ScreenMain.this, ScreenSettings.class);
         startActivity(settings);
     }
 }

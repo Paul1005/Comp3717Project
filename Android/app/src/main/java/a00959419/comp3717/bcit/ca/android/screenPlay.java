@@ -8,15 +8,14 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.app.Activity;
 
-import static a00959419.comp3717.bcit.ca.android.screenMain.mediaPlayer;
+import static a00959419.comp3717.bcit.ca.android.ScreenMain.mediaPlayer;
 
 /**
  * Created by Kunlaya on 2017-01-26.
  */
 
-public class screenPlay extends Activity {
+public class ScreenPlay extends Activity {
     private move mov = new move();
     private Thread thread = new Thread(mov);
 
@@ -26,13 +25,13 @@ public class screenPlay extends Activity {
         setContentView(R.layout.activity_play);
         findViewById(R.id.buttonRight).setOnTouchListener(new pressListener());
         mediaPlayer.reset();
-         mediaPlayer = MediaPlayer.create(screenPlay.this, R.raw.game);
+         mediaPlayer = MediaPlayer.create(ScreenPlay.this, R.raw.game);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
     }
 
     public void buttonPauseClick(View view) {
-        Intent paused = new Intent(screenPlay.this, screenPaused.class);
+        Intent paused = new Intent(ScreenPlay.this, ScreenPaused.class);
         startActivity(paused);
     }
 

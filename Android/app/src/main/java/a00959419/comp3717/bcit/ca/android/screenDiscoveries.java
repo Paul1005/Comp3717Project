@@ -9,7 +9,7 @@ import android.view.View;
  * Created by Kunlaya on 2017-01-25.
  */
 
-public class screenDiscoveries extends Activity {
+public class ScreenDiscoveries extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +21,7 @@ public class screenDiscoveries extends Activity {
     }
 
     public void buttonTempClick(View view) {
-        Intent discovery = new Intent(screenDiscoveries.this, screenDiscovery.class);
+        Intent discovery = new Intent(ScreenDiscoveries.this, ScreenDiscovery.class);
         startActivity(discovery);
     }
 }

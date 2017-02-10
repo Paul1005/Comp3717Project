@@ -9,7 +9,7 @@ import android.view.View;
  * Created by Kunlaya on 2017-01-25.
  */
 
-public class screenPaused extends Activity{
+public class ScreenPaused extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,12 +21,12 @@ public class screenPaused extends Activity{
     }
 
     public void buttonSettingsClick(View view) {
-        Intent settings = new Intent(screenPaused.this, screenSettings.class);
+        Intent settings = new Intent(ScreenPaused.this, ScreenSettings.class);
         startActivity(settings);
     }
 
     public void buttonHomeClick(View view) {
-        Intent home = new Intent(screenPaused.this, screenMain.class);
+        Intent home = new Intent(ScreenPaused.this, ScreenMain.class);
         home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home);
     }

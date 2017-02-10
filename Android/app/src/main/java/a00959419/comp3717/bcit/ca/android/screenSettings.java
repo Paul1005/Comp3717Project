@@ -2,24 +2,19 @@ package a00959419.comp3717.bcit.ca.android;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.media.AudioManager;
-import static a00959419.comp3717.bcit.ca.android.screenMain.mediaPlayer;
+import static a00959419.comp3717.bcit.ca.android.ScreenMain.mediaPlayer;
 
 /**
  * Created by Kunlaya on 2017-01-25.
  */
 
-public class screenSettings extends Activity {
+public class ScreenSettings extends Activity {
     private SeekBar volumeSeekbar = null;
     private AudioManager audioManager = null;
 

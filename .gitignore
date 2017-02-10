@@ -36,3 +36,8 @@ Android/app/build/
 
 #NDK
 obj/
+Android/app/app.iml
+Android/gradle/wrapper/gradle-wrapper.jar
+Android/gradlew
+*.properties
+Android/gradlew
