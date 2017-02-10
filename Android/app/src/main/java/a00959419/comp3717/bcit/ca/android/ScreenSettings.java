@@ -9,6 +9,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.media.AudioManager;
 import static a00959419.comp3717.bcit.ca.android.ScreenMain.mediaPlayer;
+import static a00959419.comp3717.bcit.ca.android.ScreenMain.soundFX;
 
 /**
  * Created by Kunlaya on 2017-01-25.
@@ -17,6 +18,7 @@ import static a00959419.comp3717.bcit.ca.android.ScreenMain.mediaPlayer;
 public class ScreenSettings extends Activity {
     private SeekBar volumeSeekbar = null;
     private AudioManager audioManager = null;
+    public static boolean mute = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +30,14 @@ public class ScreenSettings extends Activity {
     }
 
     public void onMute(View view) {
+        soundFX.start();
         Switch onOffSwitch = (Switch)view;
         if(onOffSwitch.isChecked()){
             mediaPlayer.pause();
+            mute = true;
         }else{
             mediaPlayer.start();
+            mute = false;
         }
     }
 

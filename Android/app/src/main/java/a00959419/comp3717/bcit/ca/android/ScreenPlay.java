@@ -9,7 +9,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
+import java.io.IOException;
+
 import static a00959419.comp3717.bcit.ca.android.ScreenMain.mediaPlayer;
+import static a00959419.comp3717.bcit.ca.android.ScreenMain.soundFX;
+import static a00959419.comp3717.bcit.ca.android.ScreenSettings.mute;
 
 /**
  * Created by Kunlaya on 2017-01-26.
@@ -25,12 +29,15 @@ public class ScreenPlay extends Activity {
         setContentView(R.layout.activity_play);
         findViewById(R.id.buttonRight).setOnTouchListener(new pressListener());
         mediaPlayer.reset();
-         mediaPlayer = MediaPlayer.create(ScreenPlay.this, R.raw.game);
+        mediaPlayer = MediaPlayer.create(ScreenPlay.this, R.raw.game);
         mediaPlayer.setLooping(true);
-        mediaPlayer.start();
+        if (!mute) {
+            mediaPlayer.start();
+        }
     }
 
     public void buttonPauseClick(View view) {
+        soundFX.start();
         Intent paused = new Intent(ScreenPlay.this, ScreenPaused.class);
         startActivity(paused);
     }
