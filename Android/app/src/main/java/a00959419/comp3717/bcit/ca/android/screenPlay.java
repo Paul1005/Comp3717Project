@@ -26,7 +26,7 @@ public class screenPlay extends Activity {
         setContentView(R.layout.activity_play);
         findViewById(R.id.buttonRight).setOnTouchListener(new pressListener());
         mediaPlayer.reset();
-        mediaPlayer = MediaPlayer.create(screenPlay.this, R.raw.game);
+         mediaPlayer = MediaPlayer.create(screenPlay.this, R.raw.game);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
     }

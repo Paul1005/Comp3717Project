@@ -1,6 +1,7 @@
 package a00959419.comp3717.bcit.ca.android;
 
 import android.media.MediaPlayer;
+import android.media.AudioManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;

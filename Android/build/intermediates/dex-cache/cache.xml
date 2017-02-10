@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b90f6e9dd4bda19bbbb67afc91deea776d99ff28">
+        <dex dex="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_879dfb893295aae517fe8e6ace4017f6744a718e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
+        <dex dex="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.1.0_b9e8f4096a919f5030bcda73de314f80e9be9950\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
+        <dex dex="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.1.0_48adc7887e21235f7d6d3afac104b622c23d5a73\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
+        <dex dex="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.1.0_a85f9edad97416cca2f8dd92ccde8e5aabbe6f83\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
+        <dex dex="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.1.0_88aca38ecb0f5ecc8443f7a40d5e0dbe880bf5b1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kunlaya\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.0\support-annotations-25.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
+        <dex dex="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.1.0_a6cbdfd7624cc9ea1ad6793c9964d72b3d494193\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
+        <dex dex="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.1.0_8c86cf042cb74ecf48898355199e9c781cd97e89\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
+        <dex dex="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.1.0_3d0618cf01f6de9d64b63cd9a7d09bbb80fdf237\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="aee64634871d88a419d59eb743c1258a60f19700">
+        <dex dex="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.1.0_dae90468f59cfed1147c879598fecfc1ad71375f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.1.0_46e850635f1940a925990b0747e59f9e2ec4526c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
+        <dex dex="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.1.0_8639b4acae8a3f69cdd82943db5598bed5f7d72e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="5e7b5071c6dc40a5f7ed848e88c479b277d5b8e2">
+        <dex dex="C:\Users\Kunlaya\Documents\My Web Sites\Comp3721Project\Android\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_e6ef9f561fc5540196245c7bb23699d982208289\classes.dex" />
+    </item>
+
+</items>
