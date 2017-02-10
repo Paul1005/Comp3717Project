@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import static a00959419.comp3717.bcit.ca.android.ScreenMain.soundFX;
+
 /**
  * Created by Kunlaya on 2017-01-25.
  */
 
-public class screenDiscoveries extends Activity {
+public class ScreenDiscoveries extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,11 +19,13 @@ public class screenDiscoveries extends Activity {
     }
 
     public void buttonBackClick(View view) {
+        soundFX.start();
         finish();
     }
 
     public void buttonTempClick(View view) {
-        Intent discovery = new Intent(screenDiscoveries.this, screenDiscovery.class);
+        soundFX.start();
+        Intent discovery = new Intent(ScreenDiscoveries.this, ScreenDiscovery.class);
         startActivity(discovery);
     }
 }
