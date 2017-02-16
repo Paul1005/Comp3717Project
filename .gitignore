@@ -37,7 +37,13 @@ Android/app/build/
 #NDK
 obj/
 Android/app/app.iml
+Android/gradlew
 *.properties
 Android/.gradle
 Android/.idea
+Android/gradle/
+Android/gradlew.bat
+Android/settings.gradle
 Android/app/proguard-rules.pro
+Android/gradle.properties
+Android/app/app.iml
