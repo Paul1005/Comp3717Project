@@ -17,6 +17,17 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 
+/*import com.esri.android.map.FeatureLayer;
+import com.esri.core.geodatabase.ShapefileFeatureTable;
+
+import java.io.FileNotFoundException;*/
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+
 import static a00959419.comp3717.bcit.ca.android.ScreenMain.mediaPlayer;
 import static a00959419.comp3717.bcit.ca.android.ScreenMain.soundFX;
 import static a00959419.comp3717.bcit.ca.android.ScreenSettings.mute;
@@ -27,6 +38,17 @@ import static a00959419.comp3717.bcit.ca.android.ScreenSettings.mute;
 
 public class ScreenPlay extends Activity {
     GameView gameView;
+
+/*    ShapefileFeatureTable mTable;
+
+   try {
+        mTable = new ShapefileFeatureTable(mShapefilePath);
+        mFlayer = new FeatureLayer(mTable);
+        mMapView.addLayer(mFlayer);
+        Log.d("**ShapefileTest**", "SpatialReference : "+ mTable.getSpatialReference());
+    } catch (FileNotFoundException e) {
+        Log.d("**ShapefileTest**", "File not found in SDCard, nothing to load");
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +164,13 @@ public class ScreenPlay extends Activity {
                 update();
 
                 // Draw the frame
-                draw();
+                try {
+                    draw();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 // Calculate the fps this frame
                 // We can then use the result to
@@ -187,26 +215,43 @@ public class ScreenPlay extends Activity {
         }
 
         // Draw the newly updated scene
-        public void draw() {
+        public void draw() throws IOException, JSONException {
 
             // Make sure our drawing surface is valid or we crash
             if (ourHolder.getSurface().isValid()) {
+                
+                //JSONObject reader = new JSONObject(in);
                 // Lock the canvas ready to draw
                 // Make the drawing surface our canvas object
                 canvas = ourHolder.lockCanvas();
 
                 // Draw the background color
+                //canvas.drawPicture();
                 canvas.drawColor(Color.argb(255,  26, 128, 182));
 
                 // Choose the brush color for drawing
-                paint.setColor(Color.argb(255,  249, 129, 0));
-
+                paint.setColor(Color.argb(255,  0, 0, 0));
+                paint.setStyle(Paint.Style.STROKE);
+                paint.setStrokeWidth(10);
                 // Make the text a bit bigger
                 paint.setTextSize(45);
 
                 // Display the current fps on the screen
                 canvas.drawText("FPS:" + fps, 20, 40, paint);
 
+                String json = null;
+                InputStream is = getAssets().open("STREETS.json");
+                int size = is.available();
+                byte[] buffer = new byte[size];
+                is.read(buffer);
+                is.close();
+                json = new String(buffer, "UTF-8");
+
+                JSONObject obj = new JSONObject(json);
+
+
+
+                canvas.drawLine(1,1,1000,1000, paint);
                 // Draw bob at bobXPosition, 200 pixels
                 canvas.drawBitmap(bitmapBob, bobXPosition, bobYPosition, paint);
 
