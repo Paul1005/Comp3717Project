@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import static a00959419.comp3717.bcit.ca.android.ScreenMain.mediaPlayer;
 import static a00959419.comp3717.bcit.ca.android.ScreenMain.soundFX;
@@ -39,17 +40,10 @@ import static a00959419.comp3717.bcit.ca.android.ScreenSettings.mute;
 
 public class ScreenPlay extends Activity {
     GameView gameView;
-
-/*    ShapefileFeatureTable mTable;
-
-   try {
-        mTable = new ShapefileFeatureTable(mShapefilePath);
-        mFlayer = new FeatureLayer(mTable);
-        mMapView.addLayer(mFlayer);
-        Log.d("**ShapefileTest**", "SpatialReference : "+ mTable.getSpatialReference());
-    } catch (FileNotFoundException e) {
-        Log.d("**ShapefileTest**", "File not found in SDCard, nothing to load");
-    }*/
+    float maxX;
+    float maxY;
+    float minX;
+    float minY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +58,53 @@ public class ScreenPlay extends Activity {
 
         if (!mute) {
             mediaPlayer.start();
+        }
+
+        try {
+            minMax();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void minMax() throws IOException, JSONException {
+        maxX = maxY = 0;
+        minX = minY = Float.MAX_VALUE;
+        String json = null;
+        InputStream is = getAssets().open("STREETS.json");
+        int size = is.available();
+        byte[] buffer = new byte[size];
+        is.read(buffer);
+        is.close();
+        json = new String(buffer, "UTF-8");
+
+        JSONObject jsonObject = new JSONObject(json);
+
+        JSONArray jsonArray = jsonObject.getJSONArray("geometries");
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            // JSONArray lineString = jsonArray.get(i);
+            JSONArray lineString = jsonArray.getJSONObject(i).getJSONArray("coordinates");
+            for (int j = 0; j < lineString.length(); j++) {
+                JSONArray startCoordinates = (JSONArray) lineString.get(j);
+                float xCur = (float) startCoordinates.getDouble(0);
+                float yCur = (float) startCoordinates.getDouble(1);
+
+                if (minX > xCur) {
+                    minX = xCur;
+                }
+                if (maxX < xCur) {
+                    maxX = xCur;
+                }
+                if (minY > yCur) {
+                    minY = yCur;
+                }
+                if (maxY < yCur) {
+                    maxY = yCur;
+                }
+            }
         }
     }
 
@@ -251,22 +292,17 @@ public class ScreenPlay extends Activity {
                 JSONObject jsonObject = new JSONObject(json);
 
                 JSONArray jsonArray = jsonObject.getJSONArray("geometries");
-                //System.out.println(jsonArray);
+
                 for (int i = 0; i < jsonArray.length(); i++) {
                     // JSONArray lineString = jsonArray.get(i);
                     JSONArray lineString = jsonArray.getJSONObject(i).getJSONArray("coordinates");
-                    JSONArray startCoordinates = (JSONArray) lineString.get(0);
-                    JSONArray endCoordinates = (JSONArray) lineString.get(1);
-                    Float startx = ((Float)startCoordinates.get(0)-506000)/100;
-                    Float starty = ((Float)startCoordinates.get(1)-540000)/100;
-                    Float endx = ((Float)endCoordinates.get(0)-506000)/100;
-                    Float endy = ((Float)endCoordinates.get(1)-540000)/100;
-                    System.out.println(startx + " " + starty + " " + endx + " " + endy);
-                    canvas.drawLine(startx, starty, endx, endy, paint);
-//                    for (int j = 0; j < lineString.length(); j++) {
-//                        JSONArray coordinates = (JSONArray) lineString.get(j);
-//                        canvas.drawLine((float) coordina0), (float) coordinates.get(0), paint);
-//                    }
+                    float[] points = new float[lineString.length()*2];
+                    for (int j = 0; j < lineString.length(); j++) {
+                        points[2*j] =(float) (((JSONArray)lineString.get(j)).getDouble(0)-minX)/5;
+                        points[2*j+1] =(float) (((JSONArray)lineString.get(j)).getDouble(1)-minY)/5;
+                        System.out.println(points[2*j] + " " + points[2*j+1]);
+                    }
+                    canvas.drawLines(points, paint);
                 }
                 // Draw bob at bobXPosition, 200 pixels
                 canvas.drawBitmap(bitmapBob, bobXPosition, bobYPosition, paint);
