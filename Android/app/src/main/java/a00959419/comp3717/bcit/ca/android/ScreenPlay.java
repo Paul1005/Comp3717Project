@@ -22,6 +22,7 @@ import com.esri.core.geodatabase.ShapefileFeatureTable;
 
 import java.io.FileNotFoundException;*/
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -191,7 +192,7 @@ public class ScreenPlay extends Activity {
 
             // If bob is moving (the player is touching the screen)
             // then move him to the right based on his target speed and the current fps.
-            switch (movH){
+            switch (movH) {
                 case RIGHT:
                     bobXPosition = bobXPosition + (walkSpeedPerSecond / fps);
                     break;
@@ -202,7 +203,7 @@ public class ScreenPlay extends Activity {
                     break;
             }
 
-            switch (movV){
+            switch (movV) {
                 case DOWN:
                     bobYPosition = bobYPosition + (walkSpeedPerSecond / fps);
                     break;
@@ -219,7 +220,7 @@ public class ScreenPlay extends Activity {
 
             // Make sure our drawing surface is valid or we crash
             if (ourHolder.getSurface().isValid()) {
-                
+
                 //JSONObject reader = new JSONObject(in);
                 // Lock the canvas ready to draw
                 // Make the drawing surface our canvas object
@@ -227,17 +228,17 @@ public class ScreenPlay extends Activity {
 
                 // Draw the background color
                 //canvas.drawPicture();
-                canvas.drawColor(Color.argb(255,  26, 128, 182));
+                canvas.drawColor(Color.argb(255, 26, 128, 182));
 
                 // Choose the brush color for drawing
-                paint.setColor(Color.argb(255,  0, 0, 0));
+                paint.setColor(Color.argb(255, 0, 0, 0));
                 paint.setStyle(Paint.Style.STROKE);
                 paint.setStrokeWidth(10);
                 // Make the text a bit bigger
                 paint.setTextSize(45);
 
                 // Display the current fps on the screen
-                canvas.drawText("FPS:" + fps, 20, 40, paint);
+                //canvas.drawText("FPS:" + fps, 20, 40, paint);
 
                 String json = null;
                 InputStream is = getAssets().open("STREETS.json");
@@ -247,11 +248,26 @@ public class ScreenPlay extends Activity {
                 is.close();
                 json = new String(buffer, "UTF-8");
 
-                JSONObject obj = new JSONObject(json);
+                JSONObject jsonObject = new JSONObject(json);
 
-
-
-                canvas.drawLine(1,1,1000,1000, paint);
+                JSONArray jsonArray = jsonObject.getJSONArray("geometries");
+                //System.out.println(jsonArray);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    // JSONArray lineString = jsonArray.get(i);
+                    JSONArray lineString = jsonArray.getJSONObject(i).getJSONArray("coordinates");
+                    JSONArray startCoordinates = (JSONArray) lineString.get(0);
+                    JSONArray endCoordinates = (JSONArray) lineString.get(1);
+                    Float startx = ((Float)startCoordinates.get(0)-506000)/100;
+                    Float starty = ((Float)startCoordinates.get(1)-540000)/100;
+                    Float endx = ((Float)endCoordinates.get(0)-506000)/100;
+                    Float endy = ((Float)endCoordinates.get(1)-540000)/100;
+                    System.out.println(startx + " " + starty + " " + endx + " " + endy);
+                    canvas.drawLine(startx, starty, endx, endy, paint);
+//                    for (int j = 0; j < lineString.length(); j++) {
+//                        JSONArray coordinates = (JSONArray) lineString.get(j);
+//                        canvas.drawLine((float) coordina0), (float) coordinates.get(0), paint);
+//                    }
+                }
                 // Draw bob at bobXPosition, 200 pixels
                 canvas.drawBitmap(bitmapBob, bobXPosition, bobYPosition, paint);
 
@@ -319,7 +335,7 @@ public class ScreenPlay extends Activity {
         }
     }
 
-    enum MovDirHorizontal{
+    enum MovDirHorizontal {
         NONE, LEFT, RIGHT
     }
 
