@@ -274,7 +274,7 @@ public class ScreenPlay extends Activity {
                 // Choose the brush color for drawing
                 paint.setColor(Color.argb(255, 0, 0, 0));
                 paint.setStyle(Paint.Style.STROKE);
-                paint.setStrokeWidth(10);
+                paint.setStrokeWidth(4);
                 // Make the text a bit bigger
                 paint.setTextSize(45);
 
@@ -296,11 +296,10 @@ public class ScreenPlay extends Activity {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     // JSONArray lineString = jsonArray.get(i);
                     JSONArray lineString = jsonArray.getJSONObject(i).getJSONArray("coordinates");
-                    float[] points = new float[lineString.length()*2];
+                    float[] points = new float[lineString.length() * 2];
                     for (int j = 0; j < lineString.length(); j++) {
-                        points[2*j] =(float) (((JSONArray)lineString.get(j)).getDouble(0)-minX)/5;
-                        points[2*j+1] =(float) (((JSONArray)lineString.get(j)).getDouble(1)-minY)/5;
-                        System.out.println(points[2*j] + " " + points[2*j+1]);
+                        points[2 * j] = (float) (((JSONArray) lineString.get(j)).getDouble(0) - minX);
+                        points[2 * j + 1] = (float) (((JSONArray) lineString.get(j)).getDouble(1) - minY);
                     }
                     canvas.drawLines(points, paint);
                 }
