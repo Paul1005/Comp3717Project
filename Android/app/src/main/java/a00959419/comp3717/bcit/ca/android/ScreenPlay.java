@@ -73,7 +73,7 @@ public class ScreenPlay extends Activity {
         maxX = maxY = 0;
         minX = minY = Float.MAX_VALUE;
         String json = null;
-        InputStream is = getAssets().open("STREETS.json");
+        InputStream is = getAssets().open("level1.json");
         int size = is.available();
         byte[] buffer = new byte[size];
         is.read(buffer);
@@ -282,7 +282,7 @@ public class ScreenPlay extends Activity {
                 //canvas.drawText("FPS:" + fps, 20, 40, paint);
 
                 String json = null;
-                InputStream is = getAssets().open("STREETS.json");
+                InputStream is = getAssets().open("level1.json");
                 int size = is.available();
                 byte[] buffer = new byte[size];
                 is.read(buffer);
@@ -298,8 +298,8 @@ public class ScreenPlay extends Activity {
                     JSONArray lineString = jsonArray.getJSONObject(i).getJSONArray("coordinates");
                     float[] points = new float[lineString.length() * 2];
                     for (int j = 0; j < lineString.length(); j++) {
-                        points[2 * j] = (float) (((JSONArray) lineString.get(j)).getDouble(0) - minX);
-                        points[2 * j + 1] = (float) (((JSONArray) lineString.get(j)).getDouble(1) - minY);
+                        points[2 * j] = (float) (((JSONArray) lineString.get(j)).getDouble(0) - minX)*2;
+                        points[2 * j + 1] = (float) (((JSONArray) lineString.get(j)).getDouble(1) - minY)*2;
                     }
                     canvas.drawLines(points, paint);
                 }
