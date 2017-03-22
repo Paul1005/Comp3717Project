@@ -15,12 +15,39 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ScreenDiscoveries"></activity>
+
+        <activity android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden"
+            android:name=".ScreenPaused"
+         />
+        <activity android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden"
+            android:name=".ScreenPlay"
+            />
+        <activity android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden"
+            android:name=".ScreenSettings"
+            />
+        <activity android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden"
+            android:name=".ScreenTutorial"/>
+        <activity android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden"
+            android:name=".ScreenDiscoveries"
+            />
+
+        <activity android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden"
+            android:name=".ScreenDiscovery"
+         />
+
+
+        <!--  <activity android:name=".ScreenDiscoveries"></activity>
         <activity android:name=".ScreenDiscovery"></activity>
         <activity android:name=".ScreenPaused"></activity>
         <activity android:name=".ScreenSettings"></activity>
         <activity android:name=".ScreenTutorial"></activity>
-        <activity android:name=".ScreenPlay"></activity>
+        <activity android:name=".ScreenPlay"></activity> -->
     </application>
 
 </manifest>
