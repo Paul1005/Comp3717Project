@@ -144,6 +144,12 @@ public class ScreenPlay extends Activity {
             // Initialize ourHolder and paint objects
             ourHolder = getHolder();
             paint = new Paint();
+<<<<<<< HEAD
+
+            // Load Bob from his .png file
+            bitmapBob = BitmapFactory.decodeResource(this.getResources(), R.drawable.dinosaurone);
+=======
+>>>>>>> e19cc81b2651c46d6ac7918cc9a3e3fb3d157414
         }
 
         @Override
