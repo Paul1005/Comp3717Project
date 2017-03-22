@@ -17,18 +17,12 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 
-/*import com.esri.android.map.FeatureLayer;
-import com.esri.core.geodatabase.ShapefileFeatureTable;
-
-import java.io.FileNotFoundException;*/
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 import static a00959419.comp3717.bcit.ca.android.ScreenMain.mediaPlayer;
 import static a00959419.comp3717.bcit.ca.android.ScreenMain.soundFX;
@@ -40,6 +34,7 @@ import static a00959419.comp3717.bcit.ca.android.ScreenSettings.mute;
 
 public class ScreenPlay extends Activity {
     GameView gameView;
+    Map map;
     float maxX;
     float maxY;
     float minX;
@@ -61,7 +56,7 @@ public class ScreenPlay extends Activity {
         }
 
         try {
-            minMax();
+            makeMap("level1.json");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -69,13 +64,12 @@ public class ScreenPlay extends Activity {
         }
     }
 
-    public void minMax() throws IOException, JSONException {
-        maxX = maxY = 0;
-        minX = minY = Float.MAX_VALUE;
-        String json = null;
-        InputStream is = getAssets().open("level1.json");
+    private void makeMap(String assetName) throws IOException, JSONException{
+        String json;
+        InputStream is = getAssets().open(assetName);
         int size = is.available();
         byte[] buffer = new byte[size];
+
         is.read(buffer);
         is.close();
         json = new String(buffer, "UTF-8");
@@ -83,29 +77,7 @@ public class ScreenPlay extends Activity {
         JSONObject jsonObject = new JSONObject(json);
 
         JSONArray jsonArray = jsonObject.getJSONArray("geometries");
-
-        for (int i = 0; i < jsonArray.length(); i++) {
-            // JSONArray lineString = jsonArray.get(i);
-            JSONArray lineString = jsonArray.getJSONObject(i).getJSONArray("coordinates");
-            for (int j = 0; j < lineString.length(); j++) {
-                JSONArray startCoordinates = (JSONArray) lineString.get(j);
-                float xCur = (float) startCoordinates.getDouble(0);
-                float yCur = (float) startCoordinates.getDouble(1);
-
-                if (minX > xCur) {
-                    minX = xCur;
-                }
-                if (maxX < xCur) {
-                    maxX = xCur;
-                }
-                if (minY > yCur) {
-                    minY = yCur;
-                }
-                if (maxY < yCur) {
-                    maxY = yCur;
-                }
-            }
-        }
+        map = new Map(jsonArray);
     }
 
     public void buttonPauseClick(View view) {
@@ -281,28 +253,8 @@ public class ScreenPlay extends Activity {
                 // Display the current fps on the screen
                 //canvas.drawText("FPS:" + fps, 20, 40, paint);
 
-                String json = null;
-                InputStream is = getAssets().open("level1.json");
-                int size = is.available();
-                byte[] buffer = new byte[size];
-                is.read(buffer);
-                is.close();
-                json = new String(buffer, "UTF-8");
+                map.display(canvas, paint);
 
-                JSONObject jsonObject = new JSONObject(json);
-
-                JSONArray jsonArray = jsonObject.getJSONArray("geometries");
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    // JSONArray lineString = jsonArray.get(i);
-                    JSONArray lineString = jsonArray.getJSONObject(i).getJSONArray("coordinates");
-                    float[] points = new float[lineString.length() * 2];
-                    for (int j = 0; j < lineString.length(); j++) {
-                        points[2 * j] = (float) (((JSONArray) lineString.get(j)).getDouble(0) - minX)*2;
-                        points[2 * j + 1] = (float) (((JSONArray) lineString.get(j)).getDouble(1) - minY)*2;
-                    }
-                    canvas.drawLines(points, paint);
-                }
                 // Draw bob at bobXPosition, 200 pixels
                 canvas.drawBitmap(bitmapBob, bobXPosition, bobYPosition, paint);
 
@@ -325,7 +277,7 @@ public class ScreenPlay extends Activity {
 
         }
 
-        // If SimpleGameEngine Activity is started theb
+        // If SimpleGameEngine Activity is started the
         // start our thread.
         public void resume() {
             playing = true;

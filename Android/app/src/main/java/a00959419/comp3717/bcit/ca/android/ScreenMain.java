@@ -21,12 +21,12 @@ public class ScreenMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         soundFX = MediaPlayer.create(ScreenMain.this, R.raw.button_press);
-        if(mediaPlayer != null) {
+        if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
         mediaPlayer = MediaPlayer.create(ScreenMain.this, R.raw.menu);
         mediaPlayer.setLooping(true);
-        if(!mute) {
+        if (!mute) {
             mediaPlayer.start();
         }
     }
