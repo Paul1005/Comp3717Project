@@ -164,7 +164,7 @@ public class ScreenPlay extends Activity {
             paint = new Paint();
 
             // Load Bob from his .png file
-            bitmapBob = BitmapFactory.decodeResource(this.getResources(), R.drawable.button_home);
+            bitmapBob = BitmapFactory.decodeResource(this.getResources(), R.drawable.dinosaurone);
         }
 
         @Override
