@@ -1,10 +1,7 @@
 package a00959419.comp3717.bcit.ca.android;
 
-
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -35,10 +32,7 @@ import static a00959419.comp3717.bcit.ca.android.ScreenSettings.mute;
 public class ScreenPlay extends Activity {
     GameView gameView;
     Map map;
-    float maxX;
-    float maxY;
-    float minX;
-    float minY;
+    Player player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +48,8 @@ public class ScreenPlay extends Activity {
         if (!mute) {
             mediaPlayer.start();
         }
+
+        player = new Player(gameView);
 
         try {
             makeMap("level1.json");
@@ -137,20 +133,6 @@ public class ScreenPlay extends Activity {
         // This is used to help calculate the fps
         private long timeThisFrame;
 
-        // Declare an object of type Bitmap
-        Bitmap bitmapBob;
-
-        // start off not moving.
-        MovDirHorizontal movH = MovDirHorizontal.NONE;
-        MovDirVertical movV = MovDirVertical.NONE;
-
-        // He can walk at 150 pixels per second
-        float walkSpeedPerSecond = 150;
-
-        // He starts 10 pixels from the left
-        float bobXPosition = 10;
-        float bobYPosition = 10;
-
         // When the we initialize (call new()) on gameView
         // This special constructor method runs
         public GameView(Context context) {
@@ -162,9 +144,6 @@ public class ScreenPlay extends Activity {
             // Initialize ourHolder and paint objects
             ourHolder = getHolder();
             paint = new Paint();
-
-            // Load Bob from his .png file
-            bitmapBob = BitmapFactory.decodeResource(this.getResources(), R.drawable.button_home);
         }
 
         @Override
@@ -202,30 +181,7 @@ public class ScreenPlay extends Activity {
         // In later projects we will have dozens (arrays) of objects.
         // We will also do other things like collision detection.
         public void update() {
-
-            // If bob is moving (the player is touching the screen)
-            // then move him to the right based on his target speed and the current fps.
-            switch (movH) {
-                case RIGHT:
-                    bobXPosition = bobXPosition + (walkSpeedPerSecond / fps);
-                    break;
-                case LEFT:
-                    bobXPosition = bobXPosition - (walkSpeedPerSecond / fps);
-                    break;
-                default:
-                    break;
-            }
-
-            switch (movV) {
-                case DOWN:
-                    bobYPosition = bobYPosition + (walkSpeedPerSecond / fps);
-                    break;
-                case UP:
-                    bobYPosition = bobYPosition - (walkSpeedPerSecond / fps);
-                    break;
-                default:
-                    break;
-            }
+            player.updatePos(fps);
         }
 
         // Draw the newly updated scene
@@ -255,8 +211,7 @@ public class ScreenPlay extends Activity {
 
                 map.display(canvas, paint);
 
-                // Draw bob at bobXPosition, 200 pixels
-                canvas.drawBitmap(bitmapBob, bobXPosition, bobYPosition, paint);
+                player.display(canvas, paint);
 
                 // Draw everything to the screen
                 // and unlock the drawing surface
@@ -289,44 +244,10 @@ public class ScreenPlay extends Activity {
         // So we can override this method and detect screen touches.
         @Override
         public boolean onTouchEvent(MotionEvent motionEvent) {
-
-            switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
-
-                // Player has touched the screen
-                case MotionEvent.ACTION_DOWN:
-
-                    // Set isMoving so Bob is moved in the update method
-                    if (motionEvent.getX() < 200)
-                        movH = MovDirHorizontal.LEFT;
-                    else if (motionEvent.getX() > 800)
-                        movH = MovDirHorizontal.RIGHT;
-
-
-                    if (motionEvent.getY() < 200)
-                        movV = MovDirVertical.UP;
-                    else if (motionEvent.getY() > 800)
-                        movV = MovDirVertical.DOWN;
-
-                    break;
-
-                // Player has removed finger from screen
-                case MotionEvent.ACTION_UP:
-
-                    // Set isMoving so Bob does not move
-                    movH = MovDirHorizontal.NONE;
-                    movV = MovDirVertical.NONE;
-
-                    break;
-            }
+            player.changeMove(motionEvent);
             return true;
         }
     }
 
-    enum MovDirHorizontal {
-        NONE, LEFT, RIGHT
-    }
 
-    enum MovDirVertical {
-        NONE, UP, DOWN
-    }
 }
