@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -26,32 +27,40 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="107dp"
-        android:layout_marginEnd="107dp"
         android:id="@+id/buttonSettings"
         android:background="@drawable/button_settings"
-        android:layout_alignBaseline="@+id/buttonHome"
-        android:layout_alignBottom="@+id/buttonHome"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="buttonSettingsClick" />
+        android:onClick="buttonSettingsClick"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/buttonBack"
+        android:layout_alignStart="@+id/buttonBack" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonBack"
-        android:background="@drawable/button_back"
-        android:layout_alignParentTop="true"
-        android:onClick="buttonBackClick" />
+        android:background="@drawable/button_resume"
+        android:onClick="buttonBackClick"
+        android:layout_above="@+id/buttonSettings"
+        android:layout_alignRight="@+id/titlePaused"
+        android:layout_alignEnd="@+id/titlePaused"
+        android:layout_marginBottom="26dp" />
 
     <Button
-        android:text="Button"
+        android:id="@+id/buttonHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonHome"
-        android:background="@drawable/button_home"
-        android:layout_below="@+id/titlePaused"
-        android:layout_toRightOf="@+id/buttonBack"
-        android:layout_toEndOf="@+id/buttonBack"
+        android:layout_alignLeft="@+id/titlePaused"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/titlePaused"
+        android:background="@drawable/button_home_test"
         android:onClick="buttonHomeClick" />
-</RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonBack"
+        android:layout_alignBottom="@+id/buttonBack"
+        android:layout_alignLeft="@+id/titlePaused"
+        android:layout_alignStart="@+id/titlePaused"
+        android:background="@drawable/button_back"
+        android:onClick="buttonBackClick" /></RelativeLayout>

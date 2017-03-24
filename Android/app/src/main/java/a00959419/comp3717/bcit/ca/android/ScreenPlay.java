@@ -146,46 +146,39 @@ public class ScreenPlay extends Activity {
             // Initialize ourHolder and paint objects
             ourHolder = getHolder();
             paint = new Paint();
-<<<<<<< HEAD
-
-
-            // Load Bob from his .png file
-          //  bitmapBob = BitmapFactory.decodeResource(this.getResources(), R.drawable.dinosaurone);
-
-=======
->>>>>>> 58a6c41971fd44ecb473284745eba3eb3da8f2d5
         }
+            @Override
+            public void run() {
+                while (playing) {
 
-        @Override
-        public void run() {
-            while (playing) {
+                    // Capture the current time in milliseconds in startFrameTime
+                    long startFrameTime = System.currentTimeMillis();
 
-                // Capture the current time in milliseconds in startFrameTime
-                long startFrameTime = System.currentTimeMillis();
+                    // Update the frame
+                    update();
 
-                // Update the frame
-                update();
+                    // Draw the frame
+                    try {
+                        draw();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
-                // Draw the frame
-                try {
-                    draw();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    // Calculate the fps this frame
+                    // We can then use the result to
+                    // time animations and more.
+                    timeThisFrame = System.currentTimeMillis() - startFrameTime;
+                    if (timeThisFrame > 0) {
+                        fps = 1000 / timeThisFrame;
+                    }
+
                 }
-
-                // Calculate the fps this frame
-                // We can then use the result to
-                // time animations and more.
-                timeThisFrame = System.currentTimeMillis() - startFrameTime;
-                if (timeThisFrame > 0) {
-                    fps = 1000 / timeThisFrame;
-                }
-
             }
 
-        }
+
+
 
         // Everything that needs to be updated goes in here
         // In later projects we will have dozens (arrays) of objects.
@@ -258,6 +251,7 @@ public class ScreenPlay extends Activity {
             player.changeMove(motionEvent);
             return true;
         }
+
     }
 
 

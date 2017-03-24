@@ -32,12 +32,10 @@ public class Player {
 
     public Player(ScreenPlay.GameView gameView) {
         // Load Bob from his .png file
-<<<<<<< HEAD
-        bitmapBob = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.dinosaurone);
-=======
+
         bitmapBob = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.dinosaur);
         bitmapBob = Bitmap.createScaledBitmap(bitmapBob, 100, 100, true);
->>>>>>> 58a6c41971fd44ecb473284745eba3eb3da8f2d5
+
     }
 
     public void changeMove(MotionEvent motionEvent) {
