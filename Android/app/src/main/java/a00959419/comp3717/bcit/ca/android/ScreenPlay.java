@@ -216,7 +216,7 @@ public class ScreenPlay extends Activity {
                 map.displayBlocks(canvas, paint);
                 //canvas.drawRect(0, 100, 100, 200 ,paint);
                 player.display(canvas, paint);
-                player.setRectPoints(map.getRectPoints());
+                player.setRects(map.getRects());
                 // Draw everything to the screen
                 // and unlock the drawing surface
                 ourHolder.unlockCanvasAndPost(canvas);
