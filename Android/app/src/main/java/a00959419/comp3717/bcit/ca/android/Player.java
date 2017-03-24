@@ -29,7 +29,7 @@ public class Player {
 
     public Player(ScreenPlay.GameView gameView) {
         // Load Bob from his .png file
-        bitmapBob = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.button_home);
+        bitmapBob = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.dinosaurone);
     }
 
     public void changeMove(MotionEvent motionEvent) {

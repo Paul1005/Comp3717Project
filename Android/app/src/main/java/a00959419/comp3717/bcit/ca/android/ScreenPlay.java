@@ -2,6 +2,7 @@ package a00959419.comp3717.bcit.ca.android;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -144,12 +145,11 @@ public class ScreenPlay extends Activity {
             // Initialize ourHolder and paint objects
             ourHolder = getHolder();
             paint = new Paint();
-<<<<<<< HEAD
+
 
             // Load Bob from his .png file
-            bitmapBob = BitmapFactory.decodeResource(this.getResources(), R.drawable.dinosaurone);
-=======
->>>>>>> e19cc81b2651c46d6ac7918cc9a3e3fb3d157414
+          //  bitmapBob = BitmapFactory.decodeResource(this.getResources(), R.drawable.dinosaurone);
+
         }
 
         @Override
