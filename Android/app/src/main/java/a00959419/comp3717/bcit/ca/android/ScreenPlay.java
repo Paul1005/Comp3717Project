@@ -53,7 +53,8 @@ public class ScreenPlay extends Activity {
         player = new Player(gameView);
 
         try {
-            makeMap("level1.json");
+            //makeMap("level1.json");
+            makeMap("level1_blocks.json");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -145,11 +146,14 @@ public class ScreenPlay extends Activity {
             // Initialize ourHolder and paint objects
             ourHolder = getHolder();
             paint = new Paint();
+<<<<<<< HEAD
 
 
             // Load Bob from his .png file
           //  bitmapBob = BitmapFactory.decodeResource(this.getResources(), R.drawable.dinosaurone);
 
+=======
+>>>>>>> 58a6c41971fd44ecb473284745eba3eb3da8f2d5
         }
 
         @Override
@@ -215,10 +219,11 @@ public class ScreenPlay extends Activity {
                 // Display the current fps on the screen
                 //canvas.drawText("FPS:" + fps, 20, 40, paint);
 
-                map.display(canvas, paint);
-
+                //map.display(canvas, paint);
+                map.displayBlocks(canvas, paint);
+                //canvas.drawRect(0, 100, 100, 200 ,paint);
                 player.display(canvas, paint);
-
+                player.setRectPoints(map.getRectPoints());
                 // Draw everything to the screen
                 // and unlock the drawing surface
                 ourHolder.unlockCanvasAndPost(canvas);
