@@ -1,12 +1,12 @@
 package a00959419.comp3717.bcit.ca.android;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.view.MotionEvent;
-
-import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -15,9 +15,11 @@ import java.util.ArrayList;
  */
 
 public class Player {
+    private static final int HEIGHT = 100;
+    private static final int WIDTH = 100;
     // Declare an object of type Bitmap
     Bitmap bitmapBob;
-    private ArrayList<Float> rectPoints;
+    private ArrayList<Rect> rects;
 
     // start off not moving.
     MovDirHorizontal movH = MovDirHorizontal.NONE;
@@ -27,13 +29,13 @@ public class Player {
     float walkSpeedPerSecond = 150;
 
     // He starts 10 pixels from the left
-    float bobXPosition = 10;
-    float bobYPosition = 10;
+    float bobXPosition = Resources.getSystem().getDisplayMetrics().widthPixels - WIDTH;
+    float bobYPosition = Resources.getSystem().getDisplayMetrics().heightPixels - HEIGHT;
 
     public Player(ScreenPlay.GameView gameView) {
         // Load Bob from his .png file
         bitmapBob = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.dinosaur);
-        bitmapBob = Bitmap.createScaledBitmap(bitmapBob, 100, 100, true);
+        bitmapBob = Bitmap.createScaledBitmap(bitmapBob, WIDTH, HEIGHT, true);
     }
 
     public void changeMove(MotionEvent motionEvent) {
@@ -72,12 +74,16 @@ public class Player {
         // then move him to the right based on his target speed and the current fps.
         switch (movH) {
             case RIGHT:
-                if (bobXPosition + walkSpeedPerSecond / fps < rectPoints.get(0)) {
-                    bobXPosition = bobXPosition + (walkSpeedPerSecond / fps);
+                float nextXPos = bobXPosition + walkSpeedPerSecond / fps;
+                if (!isColliding(nextXPos, bobYPosition, rects)) {
+                    bobXPosition = nextXPos;
                 }
                 break;
             case LEFT:
-                bobXPosition = bobXPosition - (walkSpeedPerSecond / fps);
+                nextXPos = bobXPosition - (walkSpeedPerSecond / fps);
+                if (!isColliding(nextXPos, bobYPosition, rects)) {
+                    bobXPosition = nextXPos;
+                }
                 break;
             default:
                 break;
@@ -85,14 +91,29 @@ public class Player {
 
         switch (movV) {
             case DOWN:
-                bobYPosition = bobYPosition + (walkSpeedPerSecond / fps);
+                float nextYPos = bobYPosition + (walkSpeedPerSecond / fps);
+                if (!isColliding(bobXPosition, nextYPos, rects)) {
+                    bobYPosition = nextYPos;
+                }
                 break;
             case UP:
-                bobYPosition = bobYPosition - (walkSpeedPerSecond / fps);
+                nextYPos = bobYPosition - (walkSpeedPerSecond / fps);
+                if (!isColliding(bobXPosition, nextYPos, rects)) {
+                    bobYPosition = nextYPos;
+                }
                 break;
             default:
                 break;
         }
+    }
+
+    private boolean isColliding(float xPos, float yPos, ArrayList<Rect> rects) {
+        for (Rect rect: rects) {
+            if(rect.intersect((int)xPos, (int)yPos, (int)xPos+WIDTH, (int)yPos+HEIGHT)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void display(Canvas canvas, Paint paint) {
@@ -108,7 +129,7 @@ public class Player {
         NONE, UP, DOWN
     }
 
-    public void setRectPoints(ArrayList<Float> rectPoints) {
-        this.rectPoints = rectPoints;
+    public void setRects(ArrayList<Rect> rects) {
+        this.rects = rects;
     }
 }
