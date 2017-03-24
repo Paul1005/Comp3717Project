@@ -8,6 +8,8 @@ import android.view.MotionEvent;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
+
 /**
  * Created by Andrew on 3/22/2017.
  */
@@ -15,6 +17,7 @@ import org.json.JSONException;
 public class Player {
     // Declare an object of type Bitmap
     Bitmap bitmapBob;
+    private ArrayList<Float> rectPoints;
 
     // start off not moving.
     MovDirHorizontal movH = MovDirHorizontal.NONE;
@@ -69,7 +72,9 @@ public class Player {
         // then move him to the right based on his target speed and the current fps.
         switch (movH) {
             case RIGHT:
-                bobXPosition = bobXPosition + (walkSpeedPerSecond / fps);
+                if (bobXPosition + walkSpeedPerSecond / fps < rectPoints.get(0)) {
+                    bobXPosition = bobXPosition + (walkSpeedPerSecond / fps);
+                }
                 break;
             case LEFT:
                 bobXPosition = bobXPosition - (walkSpeedPerSecond / fps);
@@ -101,5 +106,9 @@ public class Player {
 
     enum MovDirVertical {
         NONE, UP, DOWN
+    }
+
+    public void setRectPoints(ArrayList<Float> rectPoints) {
+        this.rectPoints = rectPoints;
     }
 }
