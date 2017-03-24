@@ -52,7 +52,8 @@ public class ScreenPlay extends Activity {
         player = new Player(gameView);
 
         try {
-            makeMap("level1.json");
+            //makeMap("level1.json");
+            makeMap("level1_blocks.json");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -209,8 +210,9 @@ public class ScreenPlay extends Activity {
                 // Display the current fps on the screen
                 //canvas.drawText("FPS:" + fps, 20, 40, paint);
 
-                map.display(canvas, paint);
-
+                //map.display(canvas, paint);
+                map.displayBlocks(canvas, paint);
+                //canvas.drawRect(0, 100, 100, 200 ,paint);
                 player.display(canvas, paint);
 
                 // Draw everything to the screen
