@@ -1,5 +1,6 @@
 package a00959419.comp3717.bcit.ca.android;
 
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -19,25 +20,29 @@ public class Map {
     float maxY;
     float minX;
     float minY;
-    JSONArray lines;
+    private JSONArray buildings;
     ArrayList<Rect> rects = new ArrayList<>();
+    private JSONArray trees;
 
-    public Map(JSONArray lines) {
-        this.lines = lines;
+    private static final int SCREEN_HEIGHT = Resources.getSystem().getDisplayMetrics().widthPixels;
+    private static final int SCREEN_WIDTH = Resources.getSystem().getDisplayMetrics().heightPixels;
 
+    public Map(JSONArray buildings, JSONArray trees) {
+        this.buildings = buildings;
+        this.trees = trees;
         try {
-            minMax();
+            minMax(buildings);
+            //minMax(trees);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        System.out.println(minX + " " + minY);
+        ;
     }
 
-    public void display(Canvas canvas, Paint paint) throws JSONException {
-        for (int i = 0; i < lines.length(); i++) {
+/*    public void display(Canvas canvas, Paint paint) throws JSONException {
+        for (int i = 0; i < buildings.length(); i++) {
             // JSONArray lineString = jsonArray.get(i);
-            JSONArray lineString = lines.getJSONObject(i).getJSONArray("coordinates");
+            JSONArray lineString = buildings.getJSONObject(i).getJSONArray("coordinates");
 
             float[] points = new float[lineString.length() * 2];
 
@@ -50,18 +55,18 @@ public class Map {
             //canvas.drawRect();
             canvas.drawLines(points, paint);
         }
-    }
+    }*/
 
-    public void displayBlocks(Canvas canvas, Paint paint) throws JSONException {
-        for (int i = 0; i < lines.length(); i++) {
+    public void displayBuildings(Canvas canvas, Paint paint) throws JSONException {
+        for (int i = 0; i < buildings.length(); i++) {
             // JSONArray lineString = jsonArray.get(i);
-            JSONArray lineString = lines.getJSONObject(i).getJSONArray("coordinates");
+            JSONArray lineString = buildings.getJSONObject(i).getJSONArray("coordinates");
 
             float[] points = new float[8];
 
             for (int j = 0; j < 4; j++) {
-                points[2 * j] = (float) (((JSONArray) lineString.get(j)).getDouble(0) - minX) * 3;
-                points[2 * j + 1] = (float) (((JSONArray) lineString.get(j)).getDouble(1) - minY) * 3;
+                points[2 * j] = (float) (((JSONArray) lineString.get(j)).getDouble(0) - minX) * 3 + 100;
+                points[2 * j + 1] = (float) (((JSONArray) lineString.get(j)).getDouble(1) - minY) * 3 + 100;
 
                 //System.out.println(points[2*j]);
             }
@@ -70,6 +75,26 @@ public class Map {
             canvas.drawRect(rect, paint);
 
             rects.add(rect);
+        }
+    }
+
+    public void displayTrees(Canvas canvas, Paint paint) throws JSONException {
+        for (int i = 0; i < trees.length(); i++) {
+            // JSONArray lineString = jsonArray.get(i);
+            JSONArray lineString = trees.getJSONObject(i).getJSONArray("coordinates");
+
+            float[] points = new float[2];
+
+            for (int j = 0; j < 1; j++) {
+                points[0] = (float) (((JSONArray) lineString.get(j)).getDouble(0) - minX) * 3 + 100;
+                points[1] = (float) (((JSONArray) lineString.get(j)).getDouble(1) - minY) * 3 + 100;
+
+                //System.out.println(points[2*j]);
+            }
+
+            canvas.drawCircle(points[0], points[1], 5, paint);
+
+            //rects.add(rect);
         }
     }
 
@@ -96,16 +121,16 @@ public class Map {
                 }
             }
         }
-        return new Rect((int)MINX, (int)MINY, (int)MAXX, (int)MAXY);
+        return new Rect((int) MINX, (int) MINY, (int) MAXX, (int) MAXY);
     }
 
-    public void minMax() throws JSONException {
+    public void minMax(JSONArray jsonArray) throws JSONException {
         minX = Float.MAX_VALUE;
         minY = Float.MAX_VALUE;
 
-        for (int i = 0; i < lines.length(); i++) {
+        for (int i = 0; i < jsonArray.length(); i++) {
             // JSONArray lineString = jsonArray.get(i);
-            JSONArray lineString = lines.getJSONObject(i).getJSONArray("coordinates");
+            JSONArray lineString = jsonArray.getJSONObject(i).getJSONArray("coordinates");
             for (int j = 0; j < lineString.length(); j++) {
                 JSONArray startCoordinates = (JSONArray) lineString.get(j);
                 float xCur = (float) startCoordinates.getDouble(0);
@@ -129,5 +154,8 @@ public class Map {
 
     public ArrayList<Rect> getRects() {
         return rects;
+    }
+
+    public void doStuff(JSONArray jsonArray) {
     }
 }

@@ -2,7 +2,6 @@ package a00959419.comp3717.bcit.ca.android;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -53,8 +52,7 @@ public class ScreenPlay extends Activity {
         player = new Player(gameView);
 
         try {
-            //makeMap("level1.json");
-            makeMap("level1_blocks.json");
+            makeMap("level1_blocks.json", "level1_trees.json");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -62,9 +60,13 @@ public class ScreenPlay extends Activity {
         }
     }
 
-    private void makeMap(String assetName) throws IOException, JSONException{
+    private void makeMap(String buildings, String trees) throws IOException, JSONException {
+        map = new Map(getJsonFromFile(buildings),  getJsonFromFile(trees));
+    }
+
+    private JSONArray getJsonFromFile(String jsonFile) throws IOException, JSONException {
         String json;
-        InputStream is = getAssets().open(assetName);
+        InputStream is = getAssets().open(jsonFile);
         int size = is.available();
         byte[] buffer = new byte[size];
 
@@ -74,8 +76,7 @@ public class ScreenPlay extends Activity {
 
         JSONObject jsonObject = new JSONObject(json);
 
-        JSONArray jsonArray = jsonObject.getJSONArray("geometries");
-        map = new Map(jsonArray);
+        return jsonObject.getJSONArray("geometries");
     }
 
     public void buttonPauseClick(View view) {
@@ -147,37 +148,36 @@ public class ScreenPlay extends Activity {
             ourHolder = getHolder();
             paint = new Paint();
         }
-            @Override
-            public void run() {
-                while (playing) {
 
-                    // Capture the current time in milliseconds in startFrameTime
-                    long startFrameTime = System.currentTimeMillis();
+        @Override
+        public void run() {
+            while (playing) {
 
-                    // Update the frame
-                    update();
+                // Capture the current time in milliseconds in startFrameTime
+                long startFrameTime = System.currentTimeMillis();
 
-                    // Draw the frame
-                    try {
-                        draw();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                // Update the frame
+                update();
 
-                    // Calculate the fps this frame
-                    // We can then use the result to
-                    // time animations and more.
-                    timeThisFrame = System.currentTimeMillis() - startFrameTime;
-                    if (timeThisFrame > 0) {
-                        fps = 1000 / timeThisFrame;
-                    }
-
+                // Draw the frame
+                try {
+                    draw();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+
+                // Calculate the fps this frame
+                // We can then use the result to
+                // time animations and more.
+                timeThisFrame = System.currentTimeMillis() - startFrameTime;
+                if (timeThisFrame > 0) {
+                    fps = 1000 / timeThisFrame;
+                }
+
             }
-
-
+        }
 
 
         // Everything that needs to be updated goes in here
@@ -213,7 +213,8 @@ public class ScreenPlay extends Activity {
                 //canvas.drawText("FPS:" + fps, 20, 40, paint);
 
                 //map.display(canvas, paint);
-                map.displayBlocks(canvas, paint);
+                map.displayBuildings(canvas, paint);
+                map.displayTrees(canvas, paint);
                 //canvas.drawRect(0, 100, 100, 200 ,paint);
                 player.display(canvas, paint);
                 player.setRects(map.getRects());

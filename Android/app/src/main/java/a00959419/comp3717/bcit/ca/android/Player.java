@@ -15,8 +15,11 @@ import java.util.ArrayList;
  */
 
 public class Player {
-    private static final int HEIGHT = 100;
-    private static final int WIDTH = 100;
+    private static final int PLAYER_HEIGHT = 100;
+    private static final int PLAYER_WIDTH = 100;
+
+    private static final int SCREEN_HEIGHT = Resources.getSystem().getDisplayMetrics().widthPixels;
+    private static final int SCREEN_WIDTH = Resources.getSystem().getDisplayMetrics().heightPixels;
     // Declare an object of type Bitmap
     Bitmap bitmapBob;
     private ArrayList<Rect> rects;
@@ -29,15 +32,15 @@ public class Player {
     float walkSpeedPerSecond = 150;
 
     // He starts 10 pixels from the left
-    float bobXPosition = Resources.getSystem().getDisplayMetrics().widthPixels - WIDTH;
-    float bobYPosition = Resources.getSystem().getDisplayMetrics().heightPixels - HEIGHT;
+    float bobXPosition = SCREEN_HEIGHT - PLAYER_WIDTH;
+    float bobYPosition = SCREEN_WIDTH - PLAYER_HEIGHT;
 
     public Player(ScreenPlay.GameView gameView) {
         // Load Bob from his .png file
 
         bitmapBob = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.dinosaur);
 
-        bitmapBob = Bitmap.createScaledBitmap(bitmapBob, WIDTH, HEIGHT, true);
+        bitmapBob = Bitmap.createScaledBitmap(bitmapBob, PLAYER_WIDTH, PLAYER_HEIGHT, true);
 
     }
 
@@ -111,8 +114,9 @@ public class Player {
     }
 
     private boolean isColliding(float xPos, float yPos, ArrayList<Rect> rects) {
-        for (Rect rect: rects) {
-            if(rect.intersect((int)xPos, (int)yPos, (int)xPos+WIDTH, (int)yPos+HEIGHT)){
+        for (Rect rect : rects) {
+            if (rect.intersect((int) xPos, (int) yPos, (int) xPos + PLAYER_WIDTH, (int) yPos +
+                    PLAYER_HEIGHT)) {
                 return true;
             }
         }
