@@ -36,12 +36,9 @@ public class Player {
         // Load Bob from his .png file
 
         bitmapBob = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.dinosaur);
-<<<<<<< HEAD
-        bitmapBob = Bitmap.createScaledBitmap(bitmapBob, 100, 100, true);
 
-=======
         bitmapBob = Bitmap.createScaledBitmap(bitmapBob, WIDTH, HEIGHT, true);
->>>>>>> e2165d1aaa23e4e9406ec5777cb856bfe66700b6
+
     }
 
     public void changeMove(MotionEvent motionEvent) {
