@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.MotionEvent;
@@ -17,13 +18,13 @@ import java.util.ArrayList;
 public class Player {
     private static final int PLAYER_HEIGHT = 100;
     private static final int PLAYER_WIDTH = 100;
-
+    private int score = 0;
     private static final int SCREEN_HEIGHT = Resources.getSystem().getDisplayMetrics().widthPixels;
     private static final int SCREEN_WIDTH = Resources.getSystem().getDisplayMetrics().heightPixels;
     // Declare an object of type Bitmap
     Bitmap bitmapBob;
     private ArrayList<Rect> rects;
-
+    private ArrayList<Rect> circles;
     // start off not moving.
     MovDirHorizontal movH = MovDirHorizontal.NONE;
     MovDirVertical movV = MovDirVertical.NONE;
@@ -83,12 +84,19 @@ public class Player {
                 float nextXPos = bobXPosition + walkSpeedPerSecond / fps;
                 if (!isColliding(nextXPos, bobYPosition, rects)) {
                     bobXPosition = nextXPos;
+                    if (isColliding(nextXPos, bobYPosition, circles)) {
+                        score++;
+
+                    }
                 }
                 break;
             case LEFT:
                 nextXPos = bobXPosition - (walkSpeedPerSecond / fps);
                 if (!isColliding(nextXPos, bobYPosition, rects)) {
                     bobXPosition = nextXPos;
+                    if (isColliding(nextXPos, bobYPosition, circles)) {
+                        score++;
+                    }
                 }
                 break;
             default:
@@ -100,12 +108,18 @@ public class Player {
                 float nextYPos = bobYPosition + (walkSpeedPerSecond / fps);
                 if (!isColliding(bobXPosition, nextYPos, rects)) {
                     bobYPosition = nextYPos;
+                    if (isColliding(bobXPosition, nextYPos, circles)) {
+                        score++;
+                    }
                 }
                 break;
             case UP:
                 nextYPos = bobYPosition - (walkSpeedPerSecond / fps);
                 if (!isColliding(bobXPosition, nextYPos, rects)) {
                     bobYPosition = nextYPos;
+                    if (isColliding(bobXPosition, nextYPos, circles)) {
+                        score++;
+                    }
                 }
                 break;
             default:
@@ -124,8 +138,15 @@ public class Player {
     }
 
     public void display(Canvas canvas, Paint paint) {
+
         // Draw bob at bobXPosition, 200 pixels
         canvas.drawBitmap(bitmapBob, bobXPosition, bobYPosition, paint);
+        paint.setColor(Color.BLACK);
+        canvas.drawText("Score:" + score, 20, 40, paint);
+    }
+
+    public void setCircles(ArrayList<Rect> circles) {
+        this.circles = circles;
     }
 
     enum MovDirHorizontal {

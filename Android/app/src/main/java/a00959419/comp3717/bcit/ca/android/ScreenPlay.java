@@ -200,7 +200,7 @@ public class ScreenPlay extends Activity {
 
                 // Draw the background color
                 //canvas.drawPicture();
-                canvas.drawColor(Color.argb(255, 26, 128, 182));
+                canvas.drawColor(Color.argb(255, 255,248,220));
 
                 // Choose the brush color for drawing
                 paint.setColor(Color.argb(255, 0, 0, 0));
@@ -218,6 +218,7 @@ public class ScreenPlay extends Activity {
                 //canvas.drawRect(0, 100, 100, 200 ,paint);
                 player.display(canvas, paint);
                 player.setRects(map.getRects());
+                player.setCircles(map.getCircles());
                 // Draw everything to the screen
                 // and unlock the drawing surface
                 ourHolder.unlockCanvasAndPost(canvas);

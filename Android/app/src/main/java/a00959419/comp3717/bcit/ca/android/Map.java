@@ -2,6 +2,7 @@ package a00959419.comp3717.bcit.ca.android;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
@@ -21,7 +22,9 @@ public class Map {
     float minX;
     float minY;
     private JSONArray buildings;
-    ArrayList<Rect> rects = new ArrayList<>();
+    private ArrayList<Rect> rects = new ArrayList<>();
+    private ArrayList<Rect> circles = new ArrayList<>();
+
     private JSONArray trees;
 
     private static final int SCREEN_HEIGHT = Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -72,6 +75,8 @@ public class Map {
             }
 
             Rect rect = createRect(points);
+            paint.setStyle(Paint.Style.FILL);
+            paint.setColor(Color.GRAY);
             canvas.drawRect(rect, paint);
 
             rects.add(rect);
@@ -83,17 +88,23 @@ public class Map {
             // JSONArray lineString = jsonArray.get(i);
             JSONArray lineString = trees.getJSONObject(i).getJSONArray("coordinates");
 
-            float[] points = new float[2];
+            float[] points = new float[3];
 
             for (int j = 0; j < 1; j++) {
                 points[0] = (float) (((JSONArray) lineString.get(j)).getDouble(0) - minX) * 3 + 100;
                 points[1] = (float) (((JSONArray) lineString.get(j)).getDouble(1) - minY) * 3 + 100;
-
+                points[2] = 10;
                 //System.out.println(points[2*j]);
             }
+            paint.setStyle(Paint.Style.FILL);
+            paint.setColor(Color.GREEN);
+            canvas.drawCircle(points[0], points[1], points[2], paint);
 
-            canvas.drawCircle(points[0], points[1], 5, paint);
+            Rect circle = new Rect((int) points[0] - (int) points[2], (int) points[1] -
+                    (int) points[2], (int) points[0] + (int) points[2], (int) points[1] +
+                    (int) points[2]);
 
+            circles.add(circle);
             //rects.add(rect);
         }
     }
@@ -156,6 +167,7 @@ public class Map {
         return rects;
     }
 
-    public void doStuff(JSONArray jsonArray) {
+    public ArrayList<Rect> getCircles() {
+        return circles;
     }
 }
