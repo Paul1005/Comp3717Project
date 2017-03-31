@@ -18,21 +18,21 @@ import java.util.ArrayList;
 public class Player {
     private static final int PLAYER_HEIGHT = 100;
     private static final int PLAYER_WIDTH = 100;
-    private static final int LEFT_THRESHOLD
-            = Resources.getSystem().getDisplayMetrics().widthPixels/5;
-    private static final int RIGHT_THRESHOLD
-            = Resources.getSystem().getDisplayMetrics().widthPixels - LEFT_THRESHOLD;
-    private static final int TOP_THRESHOLD
-            = Resources.getSystem().getDisplayMetrics().heightPixels/4;
-    private static final int BOT_THRESHOLD
-            = Resources.getSystem().getDisplayMetrics().heightPixels-TOP_THRESHOLD;
+
+    private static final int SCREEN_HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
+    private static final int SCREEN_WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
+
+    private static final int LEFT_THRESHOLD = SCREEN_WIDTH / 5;
+    private static final int RIGHT_THRESHOLD = SCREEN_WIDTH - LEFT_THRESHOLD;
+    private static final int TOP_THRESHOLD = SCREEN_HEIGHT / 4;
+    private static final int BOT_THRESHOLD = SCREEN_HEIGHT - TOP_THRESHOLD;
+
     private int score = 0;
-    private static final int SCREEN_HEIGHT = Resources.getSystem().getDisplayMetrics().widthPixels;
-    private static final int SCREEN_WIDTH = Resources.getSystem().getDisplayMetrics().heightPixels;
+
     // Declare an object of type Bitmap
     Bitmap bitmapBob;
-    private ArrayList<Rect> rects;
-    private ArrayList<Rect> circles;
+    private ArrayList<Rect> buildings;
+    private ArrayList<Rect> trees;
     // start off not moving.
     MovDirHorizontal movH = MovDirHorizontal.NONE;
     MovDirVertical movV = MovDirVertical.NONE;
@@ -41,8 +41,8 @@ public class Player {
     float walkSpeedPerSecond = 150;
 
     // He starts 10 pixels from the left
-    float bobXPosition = SCREEN_HEIGHT - PLAYER_WIDTH;
-    float bobYPosition = SCREEN_WIDTH - PLAYER_HEIGHT;
+    float bobXPosition = SCREEN_WIDTH - PLAYER_WIDTH;
+    float bobYPosition = SCREEN_HEIGHT - PLAYER_HEIGHT;
 
     public Player(ScreenPlay.GameView gameView) {
         // Load Bob from his .png file
@@ -90,9 +90,9 @@ public class Player {
         switch (movH) {
             case RIGHT:
                 float nextXPos = bobXPosition + walkSpeedPerSecond / fps;
-                if (!isColliding(nextXPos, bobYPosition, rects)) {
+                if (!isColliding(nextXPos, bobYPosition, buildings)) {
                     bobXPosition = nextXPos;
-                    if (isColliding(nextXPos, bobYPosition, circles)) {
+                    if (isColliding(nextXPos, bobYPosition, trees)) {
                         score++;
 
                     }
@@ -100,9 +100,9 @@ public class Player {
                 break;
             case LEFT:
                 nextXPos = bobXPosition - (walkSpeedPerSecond / fps);
-                if (!isColliding(nextXPos, bobYPosition, rects)) {
+                if (!isColliding(nextXPos, bobYPosition, buildings)) {
                     bobXPosition = nextXPos;
-                    if (isColliding(nextXPos, bobYPosition, circles)) {
+                    if (isColliding(nextXPos, bobYPosition, trees)) {
                         score++;
                     }
                 }
@@ -114,18 +114,18 @@ public class Player {
         switch (movV) {
             case DOWN:
                 float nextYPos = bobYPosition + (walkSpeedPerSecond / fps);
-                if (!isColliding(bobXPosition, nextYPos, rects)) {
+                if (!isColliding(bobXPosition, nextYPos, buildings)) {
                     bobYPosition = nextYPos;
-                    if (isColliding(bobXPosition, nextYPos, circles)) {
+                    if (isColliding(bobXPosition, nextYPos, trees)) {
                         score++;
                     }
                 }
                 break;
             case UP:
                 nextYPos = bobYPosition - (walkSpeedPerSecond / fps);
-                if (!isColliding(bobXPosition, nextYPos, rects)) {
+                if (!isColliding(bobXPosition, nextYPos, buildings)) {
                     bobYPosition = nextYPos;
-                    if (isColliding(bobXPosition, nextYPos, circles)) {
+                    if (isColliding(bobXPosition, nextYPos, trees)) {
                         score++;
                     }
                 }
@@ -147,15 +147,14 @@ public class Player {
     }
 
     public void display(Canvas canvas, Paint paint) {
-
         // Draw bob at bobXPosition, 200 pixels
         canvas.drawBitmap(bitmapBob, bobXPosition, bobYPosition, paint);
         paint.setColor(Color.BLACK);
-        canvas.drawText("Score:" + score, 20, 40, paint);
+        //canvas.drawText("Score:" + score, 20, 40, paint);
     }
 
-    public void setCircles(ArrayList<Rect> circles) {
-        this.circles = circles;
+    public void setTrees(ArrayList<Rect> trees) {
+        this.trees = trees;
     }
 
     enum MovDirHorizontal {
@@ -166,7 +165,7 @@ public class Player {
         NONE, UP, DOWN
     }
 
-    public void setRects(ArrayList<Rect> rects) {
-        this.rects = rects;
+    public void setBuildings(ArrayList<Rect> buildings) {
+        this.buildings = buildings;
     }
 }

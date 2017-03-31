@@ -210,14 +210,14 @@ public class ScreenPlay extends Activity {
                 paint.setTextSize(45);
 
                 // Display the current fps on the screen
-                //canvas.drawText("FPS:" + fps, 20, 40, paint);
+                canvas.drawText("FPS:" + fps, 20, 40, paint);
 
                 //map.display(canvas, paint);
                 map.display(canvas, paint);
                 //canvas.drawRect(0, 100, 100, 200 ,paint);
                 player.display(canvas, paint);
-                player.setRects(map.getBuildings());
-                player.setCircles(map.getTrees());
+                player.setBuildings(map.getBuildings());
+                player.setTrees(map.getTrees());
                 // Draw everything to the screen
                 // and unlock the drawing surface
                 ourHolder.unlockCanvasAndPost(canvas);
