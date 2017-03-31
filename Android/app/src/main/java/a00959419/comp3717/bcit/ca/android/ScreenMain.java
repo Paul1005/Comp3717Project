@@ -43,12 +43,6 @@ public class ScreenMain extends AppCompatActivity {
         startActivity(tutorial);
     }
 
-    public void buttonDiscoveriesClick(View view) {
-        soundFX.start();
-        Intent discoveries = new Intent(ScreenMain.this, ScreenDiscoveries.class);
-        startActivity(discoveries);
-    }
-
     public void buttonSettingsClick(View view) {
         soundFX.start();
         Intent settings = new Intent(ScreenMain.this, ScreenSettings.class);
