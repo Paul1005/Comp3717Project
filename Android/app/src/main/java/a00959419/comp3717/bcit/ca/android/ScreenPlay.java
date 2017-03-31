@@ -213,12 +213,11 @@ public class ScreenPlay extends Activity {
                 //canvas.drawText("FPS:" + fps, 20, 40, paint);
 
                 //map.display(canvas, paint);
-                map.displayBuildings(canvas, paint);
-                map.displayTrees(canvas, paint);
+                map.display(canvas, paint);
                 //canvas.drawRect(0, 100, 100, 200 ,paint);
                 player.display(canvas, paint);
-                player.setRects(map.getRects());
-                player.setCircles(map.getCircles());
+                player.setRects(map.getBuildings());
+                player.setCircles(map.getTrees());
                 // Draw everything to the screen
                 // and unlock the drawing surface
                 ourHolder.unlockCanvasAndPost(canvas);

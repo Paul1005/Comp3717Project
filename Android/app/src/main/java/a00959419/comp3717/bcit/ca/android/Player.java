@@ -18,6 +18,14 @@ import java.util.ArrayList;
 public class Player {
     private static final int PLAYER_HEIGHT = 100;
     private static final int PLAYER_WIDTH = 100;
+    private static final int LEFT_THRESHOLD
+            = Resources.getSystem().getDisplayMetrics().widthPixels/5;
+    private static final int RIGHT_THRESHOLD
+            = Resources.getSystem().getDisplayMetrics().widthPixels - LEFT_THRESHOLD;
+    private static final int TOP_THRESHOLD
+            = Resources.getSystem().getDisplayMetrics().heightPixels/4;
+    private static final int BOT_THRESHOLD
+            = Resources.getSystem().getDisplayMetrics().heightPixels-TOP_THRESHOLD;
     private int score = 0;
     private static final int SCREEN_HEIGHT = Resources.getSystem().getDisplayMetrics().widthPixels;
     private static final int SCREEN_WIDTH = Resources.getSystem().getDisplayMetrics().heightPixels;
@@ -52,15 +60,15 @@ public class Player {
             case MotionEvent.ACTION_DOWN:
 
                 // Set isMoving so Bob is moved in the update method
-                if (motionEvent.getX() < 200)
+                if (motionEvent.getX() < LEFT_THRESHOLD)
                     movH = MovDirHorizontal.LEFT;
-                else if (motionEvent.getX() > 800)
+                else if (motionEvent.getX() > RIGHT_THRESHOLD)
                     movH = MovDirHorizontal.RIGHT;
 
 
-                if (motionEvent.getY() < 200)
+                if (motionEvent.getY() < TOP_THRESHOLD)
                     movV = MovDirVertical.UP;
-                else if (motionEvent.getY() > 800)
+                else if (motionEvent.getY() > BOT_THRESHOLD)
                     movV = MovDirVertical.DOWN;
 
                 break;

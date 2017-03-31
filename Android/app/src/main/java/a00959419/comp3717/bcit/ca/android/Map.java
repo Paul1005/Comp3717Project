@@ -9,6 +9,7 @@ import android.graphics.Rect;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -16,77 +17,47 @@ import java.util.ArrayList;
  */
 
 public class Map {
-    ScreenPlay playScreen;
     float maxX;
     float maxY;
     float minX;
     float minY;
-    private JSONArray buildings;
-    private ArrayList<Rect> rects = new ArrayList<>();
-    private ArrayList<Rect> circles = new ArrayList<>();
 
-    private JSONArray trees;
+    private ArrayList<Rect> buildings = new ArrayList<>();
+    private ArrayList<Rect> trees = new ArrayList<>();
 
     private static final int SCREEN_HEIGHT = Resources.getSystem().getDisplayMetrics().widthPixels;
     private static final int SCREEN_WIDTH = Resources.getSystem().getDisplayMetrics().heightPixels;
 
     public Map(JSONArray buildings, JSONArray trees) {
-        this.buildings = buildings;
-        this.trees = trees;
         try {
             minMax(buildings);
+            initBuildings(buildings);
+            initTrees(trees);
             //minMax(trees);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        ;
     }
 
-/*    public void display(Canvas canvas, Paint paint) throws JSONException {
-        for (int i = 0; i < buildings.length(); i++) {
-            // JSONArray lineString = jsonArray.get(i);
-            JSONArray lineString = buildings.getJSONObject(i).getJSONArray("coordinates");
-
-            float[] points = new float[lineString.length() * 2];
-
-            for (int j = 0; j < lineString.length(); j++) {
-                points[2 * j] = (float) (((JSONArray) lineString.get(j)).getDouble(0) - minX) * 2;
-                points[2 * j + 1] = (float) (((JSONArray) lineString.get(j)).getDouble(1) - minY) * 2;
-
-                //System.out.println(points[2*j]);
-            }
-            //canvas.drawRect();
-            canvas.drawLines(points, paint);
-        }
-    }*/
-
-    public void displayBuildings(Canvas canvas, Paint paint) throws JSONException {
-        for (int i = 0; i < buildings.length(); i++) {
-            // JSONArray lineString = jsonArray.get(i);
-            JSONArray lineString = buildings.getJSONObject(i).getJSONArray("coordinates");
+    private void initBuildings(JSONArray rectsJSON) throws JSONException {
+        for (int i = 0; i < rectsJSON.length(); i++) {
+            JSONArray lineString = rectsJSON.getJSONObject(i).getJSONArray("coordinates");
 
             float[] points = new float[8];
 
             for (int j = 0; j < 4; j++) {
                 points[2 * j] = (float) (((JSONArray) lineString.get(j)).getDouble(0) - minX) * 3 + 100;
                 points[2 * j + 1] = (float) (((JSONArray) lineString.get(j)).getDouble(1) - minY) * 3 + 100;
-
-                //System.out.println(points[2*j]);
             }
 
             Rect rect = createRect(points);
-            paint.setStyle(Paint.Style.FILL);
-            paint.setColor(Color.GRAY);
-            canvas.drawRect(rect, paint);
-
-            rects.add(rect);
+            buildings.add(rect);
         }
     }
 
-    public void displayTrees(Canvas canvas, Paint paint) throws JSONException {
-        for (int i = 0; i < trees.length(); i++) {
-            // JSONArray lineString = jsonArray.get(i);
-            JSONArray lineString = trees.getJSONObject(i).getJSONArray("coordinates");
+    private void initTrees(JSONArray pointsJSON) throws JSONException {
+        for (int i = 0; i < pointsJSON.length(); i++) {
+            JSONArray lineString = pointsJSON.getJSONObject(i).getJSONArray("coordinates");
 
             float[] points = new float[3];
 
@@ -94,18 +65,34 @@ public class Map {
                 points[0] = (float) (((JSONArray) lineString.get(j)).getDouble(0) - minX) * 3 + 100;
                 points[1] = (float) (((JSONArray) lineString.get(j)).getDouble(1) - minY) * 3 + 100;
                 points[2] = 10;
-                //System.out.println(points[2*j]);
             }
-            paint.setStyle(Paint.Style.FILL);
-            paint.setColor(Color.GREEN);
-            canvas.drawCircle(points[0], points[1], points[2], paint);
 
             Rect circle = new Rect((int) points[0] - (int) points[2], (int) points[1] -
                     (int) points[2], (int) points[0] + (int) points[2], (int) points[1] +
                     (int) points[2]);
 
-            circles.add(circle);
-            //rects.add(rect);
+            trees.add(circle);
+        }
+    }
+
+    public void display(Canvas canvas, Paint paint) throws JSONException {
+        displayBuildings(canvas, paint);
+        displayTrees(canvas, paint);
+    }
+
+    public void displayBuildings(Canvas canvas, Paint paint) throws JSONException {
+        for (Rect rect : buildings) {
+            paint.setStyle(Paint.Style.FILL);
+            paint.setColor(Color.GRAY);
+            canvas.drawRect(rect, paint);
+        }
+    }
+
+    public void displayTrees(Canvas canvas, Paint paint) throws JSONException {
+        for (Rect circ : trees) {
+            paint.setStyle(Paint.Style.FILL);
+            paint.setColor(Color.GREEN);
+            canvas.drawCircle(circ.centerX(), circ.centerY(), 10, paint);
         }
     }
 
@@ -163,11 +150,11 @@ public class Map {
         }
     }
 
-    public ArrayList<Rect> getRects() {
-        return rects;
+    public ArrayList<Rect> getBuildings() {
+        return buildings;
     }
 
-    public ArrayList<Rect> getCircles() {
-        return circles;
+    public ArrayList<Rect> getTrees() {
+        return trees;
     }
 }
