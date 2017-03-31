@@ -137,8 +137,9 @@ public class Player {
 
     private boolean isColliding(float xPos, float yPos, ArrayList<Rect> rects) {
         for (Rect rect : rects) {
-            if (rect.intersect((int) xPos, (int) yPos, (int) xPos + PLAYER_WIDTH, (int) yPos +
-                    PLAYER_HEIGHT)) {
+            if (Rect.intersects(rect,
+                    new Rect((int) xPos, (int) yPos, (int) xPos + PLAYER_WIDTH, (int) yPos +
+                    PLAYER_HEIGHT))) {
                 return true;
             }
         }
