@@ -31,6 +31,7 @@ import static a00959419.comp3717.bcit.ca.android.ScreenSettings.mute;
 
 public class ScreenPlay extends Activity {
     GameView gameView;
+
     Map map;
     Player player;
 
@@ -49,8 +50,6 @@ public class ScreenPlay extends Activity {
             mediaPlayer.start();
         }
 
-        player = new Player(gameView);
-
         try {
             makeMap("level1_blocks.json", "level1_trees.json");
         } catch (IOException e) {
@@ -58,6 +57,8 @@ public class ScreenPlay extends Activity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        player = new Player(gameView, map);
     }
 
     private void makeMap(String buildings, String trees) throws IOException, JSONException {
@@ -210,14 +211,13 @@ public class ScreenPlay extends Activity {
                 paint.setTextSize(45);
 
                 // Display the current fps on the screen
-                canvas.drawText("FPS:" + fps, 20, 40, paint);
+                //canvas.drawText("FPS:" + fps, 20, 40, paint);
 
                 //map.display(canvas, paint);
                 map.display(canvas, paint);
                 //canvas.drawRect(0, 100, 100, 200 ,paint);
                 player.display(canvas, paint);
-                player.setBuildings(map.getBuildings());
-                player.setTrees(map.getTrees());
+
                 // Draw everything to the screen
                 // and unlock the drawing surface
                 ourHolder.unlockCanvasAndPost(canvas);
@@ -254,6 +254,4 @@ public class ScreenPlay extends Activity {
         }
 
     }
-
-
 }
