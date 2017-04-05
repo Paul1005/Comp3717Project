@@ -51,7 +51,7 @@ public class ScreenPlay extends Activity {
         }
 
         try {
-            makeMap("level1_blocks.json", "level1_trees.json");
+            makeMap("lvl1.json", "lvl1_trees.json");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {

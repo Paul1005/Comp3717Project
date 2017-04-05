@@ -16,8 +16,8 @@ import java.util.ArrayList;
  */
 
 public class Player {
-    private static final int PLAYER_HEIGHT = 100;
-    private static final int PLAYER_WIDTH = 100;
+    private static final int PLAYER_HEIGHT = 75;
+    private static final int PLAYER_WIDTH = 75;
 
     private static final int SCREEN_HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
     private static final int SCREEN_WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -41,8 +41,8 @@ public class Player {
     float walkSpeedPerSecond = 150;
 
     // He starts 10 pixels from the left
-    float bobXPosition = SCREEN_WIDTH - PLAYER_WIDTH;
-    float bobYPosition = SCREEN_HEIGHT - PLAYER_HEIGHT;
+    float bobXPosition = SCREEN_WIDTH - PLAYER_WIDTH - 150;
+    float bobYPosition = SCREEN_HEIGHT - PLAYER_HEIGHT - 150;
 
     public Player(ScreenPlay.GameView gameView, Map map) {
         // Load Bob from his .png file
@@ -125,7 +125,7 @@ public class Player {
         eat();
     }
 
-    private void eat(){
+    private void eat() {
         ArrayList<Rect> eaten = collisions(bobXPosition, bobYPosition, trees);
         score += eaten.size();
         trees.removeAll(eaten);
@@ -135,7 +135,7 @@ public class Player {
         for (Rect rect : rects) {
             if (Rect.intersects(rect,
                     new Rect((int) xPos, (int) yPos, (int) xPos + PLAYER_WIDTH, (int) yPos +
-                    PLAYER_HEIGHT))) {
+                            PLAYER_HEIGHT))) {
                 return true;
             }
         }
