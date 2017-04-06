@@ -45,3 +45,5 @@ Android/app/proguard-rules.pro
 *.prj
 *.shp
 *.shx
+*.qpj
+*.dbf
