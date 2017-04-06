@@ -61,6 +61,12 @@ public class ScreenPlay extends Activity {
         player = new Player(gameView, map);
     }
 
+    @Override
+    public void onBackPressed(){
+        Intent play = new Intent(ScreenPlay.this, ScreenPaused.class);
+        startActivity(play);
+    }
+
     private void makeMap(String buildings, String trees) throws IOException, JSONException {
         map = new Map(getJsonFromFile(buildings),  getJsonFromFile(trees));
     }
@@ -153,7 +159,7 @@ public class ScreenPlay extends Activity {
         @Override
         public void run() {
             while (playing) {
-
+                Log.d("fuck", "not paused");
                 // Capture the current time in milliseconds in startFrameTime
                 long startFrameTime = System.currentTimeMillis();
 
@@ -176,7 +182,6 @@ public class ScreenPlay extends Activity {
                 if (timeThisFrame > 0) {
                     fps = 1000 / timeThisFrame;
                 }
-
             }
         }
 
@@ -234,7 +239,7 @@ public class ScreenPlay extends Activity {
             } catch (InterruptedException e) {
                 Log.e("Error:", "joining thread");
             }
-
+            Log.d("fuck", "paused");
         }
 
         // If SimpleGameEngine Activity is started the
