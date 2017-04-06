@@ -1,122 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/title_background"
+    android:background="@drawable/background_setting"
     android:screenOrientation="landscape">
 
     <Button
         android:id="@+id/buttonBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/button_back"
-        android:onClick="buttonBackClick" />
-
-    <TextView
-        android:id="@+id/titleSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="SETTINGS"
-        android:textAlignment="textStart"
-        android:textColor="#000"
-        android:textSize="65sp"
-        android:textStyle="normal|bold" />
-
-    <TextView
-        android:id="@+id/textMusic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textSFX"
-        android:layout_alignStart="@+id/textSFX"
-        android:layout_below="@+id/titleSettings"
-        android:layout_marginTop="52dp"
-        android:text="Music"
-        android:textColor="#000"
-        android:textSize="24sp" />
-
-    <Switch
-        android:id="@+id/switchMute"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="68dp"
-        android:layout_marginStart="68dp"
-        android:splitTrack="false"
-        android:text="MUTE"
-        android:onClick="onMute"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        android:textStyle="normal|bold"
-        android:layout_marginBottom="15dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/textMusic"
-        android:layout_toEndOf="@+id/textMusic" />
-
-    <TextView
-        android:id="@+id/textMasterVol"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Master Volume"
-        android:textColor="#000"
-        android:textSize="24sp"
-        android:layout_above="@+id/switchMute"
-        android:layout_toRightOf="@+id/buttonBack"
-        android:layout_toEndOf="@+id/buttonBack"
-        android:layout_marginBottom="12dp" />
-
-    <TextView
-        android:id="@+id/textSFX"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SFX"
-        android:textColor="#f000"
-        android:textSize="24sp"
-        android:layout_below="@+id/textMusic"
-        android:layout_alignLeft="@+id/textMasterVol"
-        android:layout_alignStart="@+id/textMasterVol"
-        android:layout_marginTop="19dp" />
+        android:layout_width="44dp"
+        android:layout_height="33dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:onClick="buttonBackClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.278"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.161"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1" />
 
     <SeekBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="46dp"
-        android:layout_marginStart="46dp"
         android:id="@+id/seekBar1"
-        android:layout_alignTop="@+id/textMusic"
-        android:layout_toRightOf="@+id/switchMute"
-        android:max="5"
-        android:progress="@android:integer/config_mediumAnimTime"
-        style="@style/AppTheme"
-        android:colorAccent = "@color/colorAccent"
-        android:layout_alignRight="@+id/titleSettings"
-        android:layout_alignEnd="@+id/titleSettings" />
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="143dp"
+        android:layout_height="20dp"
+        android:max="10"
+        android:progress="3"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.568"
+        app:layout_constraintVertical_bias="0.349" />
 
-    <SeekBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/seekBar2"
-        android:layout_alignBottom="@+id/textSFX"
-        android:layout_alignLeft="@+id/seekBar1"
-        android:layout_alignStart="@+id/seekBar1"
-        android:max="5"
-        android:progress="@android:integer/config_mediumAnimTime"
-        android:layout_alignRight="@+id/seekBar1"
-        android:layout_alignEnd="@+id/seekBar1" />
+    <Button
+        android:id="@+id/buttonOn"
+        android:layout_width="58dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.474"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" />
 
-    <SeekBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/seekBar3"
-        android:layout_alignBottom="@+id/textMasterVol"
-        android:layout_alignLeft="@+id/seekBar2"
-        android:layout_alignStart="@+id/seekBar2"
-        android:max="5"
-        android:progress="@android:integer/config_mediumAnimTime"
-        android:layout_alignRight="@+id/seekBar2"
-        android:layout_alignEnd="@+id/seekBar2" />
-
-</RelativeLayout>
+    <Button
+        android:id="@+id/buttonOff"
+        android:layout_width="70dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="140dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@android:color/transparent"
+        android:onClick="stopmus"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+</android.support.constraint.ConstraintLayout>
