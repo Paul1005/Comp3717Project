@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import static a00959419.comp3717.bcit.ca.android.ScreenMain.mediaPlayer;
 import static a00959419.comp3717.bcit.ca.android.ScreenMain.soundFX;
@@ -34,6 +35,7 @@ public class ScreenPlay extends Activity {
 
     Map map;
     Player player;
+    ArrayList<Enemy> enemies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class ScreenPlay extends Activity {
         }
 
         player = new Player(gameView, map);
+        enemies.add(new Enemy(gameView, map));
     }
 
     @Override
@@ -190,6 +193,7 @@ public class ScreenPlay extends Activity {
         // In later projects we will have dozens (arrays) of objects.
         // We will also do other things like collision detection.
         public void update() {
+            enemies.get(0).updatePos(fps);
             player.updatePos(fps);
         }
 
@@ -216,12 +220,12 @@ public class ScreenPlay extends Activity {
                 paint.setTextSize(45);
 
                 // Display the current fps on the screen
-                //canvas.drawText("FPS:" + fps, 20, 40, paint);
+                canvas.drawText("FPS:" + fps, 20, 40, paint);
 
                 //map.display(canvas, paint);
                 map.display(canvas, paint);
-                //canvas.drawRect(0, 100, 100, 200 ,paint);
                 player.display(canvas, paint);
+                enemies.get(0).display(canvas, paint);
 
                 // Draw everything to the screen
                 // and unlock the drawing surface
