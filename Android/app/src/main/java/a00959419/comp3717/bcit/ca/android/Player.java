@@ -92,13 +92,13 @@ public class Player {
         switch (movH) {
             case RIGHT:
                 float nextXPos = bobXPosition + walkSpeedPerSecond / fps;
-                if (!isColliding(nextXPos, bobYPosition, buildings)) {
+                if (!isColliding(nextXPos, bobYPosition, buildings) && !isAtEdge(nextXPos, bobYPosition)) {
                     bobXPosition = nextXPos;
                 }
                 break;
             case LEFT:
                 nextXPos = bobXPosition - (walkSpeedPerSecond / fps);
-                if (!isColliding(nextXPos, bobYPosition, buildings)) {
+                if (!isColliding(nextXPos, bobYPosition, buildings) && !isAtEdge(nextXPos, bobYPosition)) {
                     bobXPosition = nextXPos;
                 }
                 break;
@@ -109,13 +109,13 @@ public class Player {
         switch (movV) {
             case DOWN:
                 float nextYPos = bobYPosition + (walkSpeedPerSecond / fps);
-                if (!isColliding(bobXPosition, nextYPos, buildings)) {
+                if (!isColliding(bobXPosition, nextYPos, buildings) && !isAtEdge(bobXPosition, nextYPos)) {
                     bobYPosition = nextYPos;
                 }
                 break;
             case UP:
                 nextYPos = bobYPosition - (walkSpeedPerSecond / fps);
-                if (!isColliding(bobXPosition, nextYPos, buildings)) {
+                if (!isColliding(bobXPosition, nextYPos, buildings) && !isAtEdge(bobXPosition, nextYPos)) {
                     bobYPosition = nextYPos;
                 }
                 break;
@@ -123,6 +123,14 @@ public class Player {
                 break;
         }
         eat();
+    }
+
+    private boolean isAtEdge(float xPos, float yPos) {
+        if (xPos < 0 || yPos < 0 || xPos > (SCREEN_WIDTH - PLAYER_WIDTH) || yPos > (SCREEN_HEIGHT -
+                PLAYER_HEIGHT*2)) {
+            return true;
+        }
+        return false;
     }
 
     private void eat() {
