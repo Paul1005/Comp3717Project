@@ -17,18 +17,20 @@ import java.util.ArrayList;
  */
 
 public class Map {
-    float maxX;
-    float maxY;
-    float minX;
-    float minY;
+    private float maxX;
+    private float maxY;
+    private float minX;
+    private float minY;
+    private float mapHeight;
+    private float mapWidth;
 
     private ArrayList<Rect> buildings = new ArrayList<>();
     private ArrayList<Rect> trees = new ArrayList<>();
 
-    private static final int SCREEN_HEIGHT = Resources.getSystem().getDisplayMetrics().widthPixels;
-    private static final int SCREEN_WIDTH = Resources.getSystem().getDisplayMetrics().heightPixels;
+    private static final int SCREEN_HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
+    private static final int SCREEN_WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
 
-    public Map(JSONArray buildings, JSONArray trees) {
+    Map(JSONArray buildings, JSONArray trees) {
         try {
             minMax(buildings);
             initBuildings(buildings);
@@ -46,8 +48,10 @@ public class Map {
             float[] points = new float[8];
 
             for (int j = 0; j < 4; j++) {
-                points[2 * j] = (float) (((JSONArray) lineString.get(j)).getDouble(0) - minX) * 3 + 100;
-                points[2 * j + 1] = (float) (((JSONArray) lineString.get(j)).getDouble(1) - minY) * 2 + 100;
+                points[2 * j] = (float) ((((JSONArray) lineString.get(j)).getDouble(0) - minX) *
+                                        (SCREEN_WIDTH / mapWidth) * 0.75 + SCREEN_WIDTH / 8);
+                points[2 * j + 1] = (float) ((((JSONArray) lineString.get(j)).getDouble(1) - minY) *
+                                        (SCREEN_HEIGHT / mapHeight) * 0.75 + SCREEN_HEIGHT / 8);
             }
 
             Rect rect = createRect(points);
@@ -61,8 +65,10 @@ public class Map {
 
             float[] points = new float[3];
 
-            points[0] = (float) (lineString.getDouble(0) - minX) * 3 + 100;
-            points[1] = (float) (lineString.getDouble(1) - minY) * 2 + 100;
+            points[0] = (float) ((lineString.getDouble(0) - minX) * (SCREEN_WIDTH / mapWidth) *
+                    0.75 + SCREEN_WIDTH / 8);
+            points[1] = (float) ((lineString.getDouble(1) - minY) * (SCREEN_HEIGHT / mapHeight) *
+                    0.75 + SCREEN_HEIGHT / 8);
             points[2] = 10;
 
             Rect circle = new Rect((int) points[0] - (int) points[2], (int) points[1] -
@@ -73,12 +79,12 @@ public class Map {
         }
     }
 
-    public void display(Canvas canvas, Paint paint) throws JSONException {
+    void display(Canvas canvas, Paint paint) throws JSONException {
         displayBuildings(canvas, paint);
         displayTrees(canvas, paint);
     }
 
-    public void displayBuildings(Canvas canvas, Paint paint) throws JSONException {
+    private void displayBuildings(Canvas canvas, Paint paint) throws JSONException {
         for (Rect rect : buildings) {
             paint.setStyle(Paint.Style.FILL);
             paint.setColor(Color.GRAY);
@@ -86,7 +92,7 @@ public class Map {
         }
     }
 
-    public void displayTrees(Canvas canvas, Paint paint) throws JSONException {
+    private void displayTrees(Canvas canvas, Paint paint) throws JSONException {
         for (Rect circ : trees) {
             paint.setStyle(Paint.Style.FILL);
             paint.setColor(Color.GREEN);
@@ -120,7 +126,7 @@ public class Map {
         return new Rect((int) MINX, (int) MINY, (int) MAXX, (int) MAXY);
     }
 
-    public void minMax(JSONArray jsonArray) throws JSONException {
+    private void minMax(JSONArray jsonArray) throws JSONException {
         minX = Float.MAX_VALUE;
         minY = Float.MAX_VALUE;
 
@@ -145,6 +151,8 @@ public class Map {
                     maxY = yCur;
                 }
             }
+            mapHeight = maxY - minY;
+            mapWidth = maxX - minX;
         }
     }
 
