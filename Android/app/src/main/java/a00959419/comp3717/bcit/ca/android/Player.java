@@ -16,8 +16,8 @@ import java.util.ArrayList;
  */
 
 public class Player {
-    private static final int PLAYER_HEIGHT = 100;
-    private static final int PLAYER_WIDTH = 100;
+    private static final int PLAYER_HEIGHT = 75;
+    private static final int PLAYER_WIDTH = 75;
 
     private static final int SCREEN_HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
     private static final int SCREEN_WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -41,16 +41,18 @@ public class Player {
     float walkSpeedPerSecond = 150;
 
     // He starts 10 pixels from the left
-    float bobXPosition = SCREEN_WIDTH - PLAYER_WIDTH;
-    float bobYPosition = SCREEN_HEIGHT - PLAYER_HEIGHT;
+    float bobXPosition = SCREEN_WIDTH - PLAYER_WIDTH - 150;
+    float bobYPosition = SCREEN_HEIGHT - PLAYER_HEIGHT - 150;
 
-    public Player(ScreenPlay.GameView gameView) {
+    public Player(ScreenPlay.GameView gameView, Map map) {
         // Load Bob from his .png file
 
         bitmapBob = BitmapFactory.decodeResource(gameView.getResources(), R.drawable.dinosaur);
 
         bitmapBob = Bitmap.createScaledBitmap(bitmapBob, PLAYER_WIDTH, PLAYER_HEIGHT, true);
 
+        setBuildings(map.getBuildings());
+        setTrees(map.getTrees());
     }
 
     public void changeMove(MotionEvent motionEvent) {
@@ -92,19 +94,12 @@ public class Player {
                 float nextXPos = bobXPosition + walkSpeedPerSecond / fps;
                 if (!isColliding(nextXPos, bobYPosition, buildings)) {
                     bobXPosition = nextXPos;
-                    if (isColliding(nextXPos, bobYPosition, trees)) {
-                        score++;
-
-                    }
                 }
                 break;
             case LEFT:
                 nextXPos = bobXPosition - (walkSpeedPerSecond / fps);
                 if (!isColliding(nextXPos, bobYPosition, buildings)) {
                     bobXPosition = nextXPos;
-                    if (isColliding(nextXPos, bobYPosition, trees)) {
-                        score++;
-                    }
                 }
                 break;
             default:
@@ -116,41 +111,55 @@ public class Player {
                 float nextYPos = bobYPosition + (walkSpeedPerSecond / fps);
                 if (!isColliding(bobXPosition, nextYPos, buildings)) {
                     bobYPosition = nextYPos;
-                    if (isColliding(bobXPosition, nextYPos, trees)) {
-                        score++;
-                    }
                 }
                 break;
             case UP:
                 nextYPos = bobYPosition - (walkSpeedPerSecond / fps);
                 if (!isColliding(bobXPosition, nextYPos, buildings)) {
                     bobYPosition = nextYPos;
-                    if (isColliding(bobXPosition, nextYPos, trees)) {
-                        score++;
-                    }
                 }
                 break;
             default:
                 break;
         }
+        eat();
+    }
+
+    private void eat() {
+        ArrayList<Rect> eaten = collisions(bobXPosition, bobYPosition, trees);
+        score += eaten.size();
+        trees.removeAll(eaten);
     }
 
     private boolean isColliding(float xPos, float yPos, ArrayList<Rect> rects) {
         for (Rect rect : rects) {
             if (Rect.intersects(rect,
                     new Rect((int) xPos, (int) yPos, (int) xPos + PLAYER_WIDTH, (int) yPos +
-                    PLAYER_HEIGHT))) {
+                            PLAYER_HEIGHT))) {
                 return true;
             }
         }
         return false;
     }
 
+    private ArrayList<Rect> collisions(float xPos, float yPos, ArrayList<Rect> rects) {
+        ArrayList<Rect> output = new ArrayList<>();
+
+        for (Rect rect : rects) {
+            if (Rect.intersects(rect,
+                    new Rect((int) xPos, (int) yPos, (int) xPos + PLAYER_WIDTH, (int) yPos +
+                            PLAYER_HEIGHT))) {
+                output.add(rect);
+            }
+        }
+        return output;
+    }
+
     public void display(Canvas canvas, Paint paint) {
         // Draw bob at bobXPosition, 200 pixels
         canvas.drawBitmap(bitmapBob, bobXPosition, bobYPosition, paint);
         paint.setColor(Color.BLACK);
-        //canvas.drawText("Score:" + score, 20, 40, paint);
+        canvas.drawText("Score:" + score, 20, 40, paint);
     }
 
     public void setTrees(ArrayList<Rect> trees) {
