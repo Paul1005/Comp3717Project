@@ -15,17 +15,19 @@ import java.util.ArrayList;
  */
 
 public class Dino {
+    public ScreenPlay screen;
+
     protected static final int SCREEN_HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
     protected static final int SCREEN_WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
 
-    // He starts 10 pixels from the left
-    float bobXPosition = SCREEN_WIDTH - MY_WIDTH - 150;
-    float bobYPosition = SCREEN_HEIGHT - MY_HEIGHT - 150;
-
-
     protected static final int MY_HEIGHT = SCREEN_WIDTH/23;
     protected static final int MY_WIDTH = SCREEN_WIDTH/23;
+
     float walkSpeedPerSecond = SCREEN_WIDTH/10;
+
+    // He starts 10 pixels from the left
+    public float xPosition = SCREEN_WIDTH - MY_WIDTH - 150;
+    public float yPosition = SCREEN_HEIGHT - MY_HEIGHT - 150;
 
     // Declare an object of type Bitmap
     Bitmap bitmapBob;
@@ -36,8 +38,8 @@ public class Dino {
     Dino.MovDirHorizontal movH = Dino.MovDirHorizontal.NONE;
     Dino.MovDirVertical movV = Dino.MovDirVertical.NONE;
 
-    public Dino(ScreenPlay.GameView gameView, Map map, int imgid) {
-        // Load Bob from his .png file
+    public Dino(ScreenPlay.GameView gameView, Map map, int imgid, ScreenPlay screen) {
+        this.screen = screen;
 
         bitmapBob = BitmapFactory.decodeResource(gameView.getResources(), imgid);
 
@@ -52,15 +54,15 @@ public class Dino {
         // then move him to the right based on his target speed and the current fps.
         switch (movH) {
             case RIGHT:
-                float nextXPos = bobXPosition + walkSpeedPerSecond / fps;
-                if (!isColliding(nextXPos, bobYPosition, buildings) && !isAtEdge(nextXPos, bobYPosition)) {
-                    bobXPosition = nextXPos;
+                float nextXPos = xPosition + walkSpeedPerSecond / fps;
+                if (!isColliding(nextXPos, yPosition, buildings) && !isAtEdge(nextXPos, yPosition)) {
+                    xPosition = nextXPos;
                 }
                 break;
             case LEFT:
-                nextXPos = bobXPosition - (walkSpeedPerSecond / fps);
-                if (!isColliding(nextXPos, bobYPosition, buildings) && !isAtEdge(nextXPos, bobYPosition)) {
-                    bobXPosition = nextXPos;
+                nextXPos = xPosition - (walkSpeedPerSecond / fps);
+                if (!isColliding(nextXPos, yPosition, buildings) && !isAtEdge(nextXPos, yPosition)) {
+                    xPosition = nextXPos;
                 }
                 break;
             default:
@@ -69,15 +71,15 @@ public class Dino {
 
         switch (movV) {
             case DOWN:
-                float nextYPos = bobYPosition + (walkSpeedPerSecond / fps);
-                if (!isColliding(bobXPosition, nextYPos, buildings) && !isAtEdge(bobXPosition, nextYPos)) {
-                    bobYPosition = nextYPos;
+                float nextYPos = yPosition + (walkSpeedPerSecond / fps);
+                if (!isColliding(xPosition, nextYPos, buildings) && !isAtEdge(xPosition, nextYPos)) {
+                    yPosition = nextYPos;
                 }
                 break;
             case UP:
-                nextYPos = bobYPosition - (walkSpeedPerSecond / fps);
-                if (!isColliding(bobXPosition, nextYPos, buildings) && !isAtEdge(bobXPosition, nextYPos)) {
-                    bobYPosition = nextYPos;
+                nextYPos = yPosition - (walkSpeedPerSecond / fps);
+                if (!isColliding(xPosition, nextYPos, buildings) && !isAtEdge(xPosition, nextYPos)) {
+                    yPosition = nextYPos;
                 }
                 break;
             default:
@@ -118,7 +120,7 @@ public class Dino {
     }
 
     public void display(Canvas canvas, Paint paint) {
-        canvas.drawBitmap(bitmapBob, bobXPosition, bobYPosition, paint);
+        canvas.drawBitmap(bitmapBob, xPosition, yPosition, paint);
         paint.setColor(Color.BLACK);
     }
 

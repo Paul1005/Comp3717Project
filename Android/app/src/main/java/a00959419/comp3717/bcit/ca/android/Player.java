@@ -1,11 +1,5 @@
 package a00959419.comp3717.bcit.ca.android;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 
@@ -25,8 +19,8 @@ public class Player extends Dino{
 
     private int score = 0;
 
-    public Player(ScreenPlay.GameView gameView, Map map) {
-        super(gameView, map, R.drawable.dinosaur);
+    public Player(ScreenPlay.GameView gameView, Map map, ScreenPlay screen) {
+        super(gameView, map, R.drawable.dinosaur, screen);
     }
 
     public void changeMove(MotionEvent motionEvent) {
@@ -69,11 +63,8 @@ public class Player extends Dino{
     }
 
     private void eat() {
-        ArrayList<Rect> eaten = collisions(bobXPosition, bobYPosition, trees);
+        ArrayList<Rect> eaten = collisions(xPosition, yPosition, trees);
         score += eaten.size();
         trees.removeAll(eaten);
     }
-
-
-
 }

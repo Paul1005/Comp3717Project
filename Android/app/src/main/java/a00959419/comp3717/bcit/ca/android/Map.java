@@ -9,7 +9,6 @@ import android.graphics.Rect;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**

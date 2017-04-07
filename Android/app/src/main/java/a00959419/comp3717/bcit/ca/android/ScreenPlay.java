@@ -60,8 +60,8 @@ public class ScreenPlay extends Activity {
             e.printStackTrace();
         }
 
-        player = new Player(gameView, map);
-        enemies.add(new Enemy(gameView, map));
+        player = new Player(gameView, map, this);
+        enemies.add(new Enemy(gameView, map, this, player));
     }
 
     @Override
