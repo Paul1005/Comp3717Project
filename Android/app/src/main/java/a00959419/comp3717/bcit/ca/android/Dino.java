@@ -87,7 +87,7 @@ public class Dino {
         }
     }
 
-    private boolean isAtEdge(float xPos, float yPos) {
+    protected boolean isAtEdge(float xPos, float yPos) {
         if (xPos < 0 || yPos < 0 || xPos > (SCREEN_WIDTH - MY_WIDTH) || yPos > (SCREEN_HEIGHT -
                 MY_HEIGHT *2)) {
             return true;

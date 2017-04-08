@@ -21,17 +21,57 @@ public class Enemy extends Dino {
         yPosition = 0;
     }
 
-    @Override
-    public void updatePos(long fps) {
-        // If bob is moving (the player is touching the screen)
-        // then move him to the right based on his target speed and the current fps.
-        super.updatePos(fps);
-        eat();
-    }
-
     private void eat() {
         if (Rect.intersects(new Rect((int)xPosition, (int)yPosition, (int)xPosition+MY_WIDTH, (int)yPosition + MY_HEIGHT),
                 new Rect((int)player.xPosition, (int)player.yPosition, (int)player.xPosition+MY_WIDTH, (int)player.yPosition + MY_HEIGHT)))
             screen.finish();
+    }
+
+    @Override
+    public void updatePos(long fps) {
+        // If bob is moving (the player is touching the screen)
+        // then move him to the right based on his target speed and the current fps.
+        switch (movH) {
+            case RIGHT:
+                float nextXPos = xPosition + walkSpeedPerSecond / fps;
+                if (!isColliding(nextXPos, yPosition, buildings) && !isAtEdge(nextXPos, yPosition)) {
+                    xPosition = nextXPos;
+                } else {
+                    movH = MovDirHorizontal.LEFT;
+                }
+                break;
+            case LEFT:
+                nextXPos = xPosition - (walkSpeedPerSecond / fps);
+                if (!isColliding(nextXPos, yPosition, buildings) && !isAtEdge(nextXPos, yPosition)) {
+                    xPosition = nextXPos;
+                } else {
+                    movH = MovDirHorizontal.RIGHT;
+                }
+                break;
+            default:
+                break;
+        }
+
+        switch (movV) {
+            case DOWN:
+                float nextYPos = yPosition + (walkSpeedPerSecond / fps);
+                if (!isColliding(xPosition, nextYPos, buildings) && !isAtEdge(xPosition, nextYPos)) {
+                    yPosition = nextYPos;
+                } else {
+                    movV = MovDirVertical.UP;
+                }
+                break;
+            case UP:
+                nextYPos = yPosition - (walkSpeedPerSecond / fps);
+                if (!isColliding(xPosition, nextYPos, buildings) && !isAtEdge(xPosition, nextYPos)) {
+                    yPosition = nextYPos;
+                } else {
+                    movV = MovDirVertical.DOWN;
+                }
+                break;
+            default:
+                break;
+        }
+        eat();
     }
 }
