@@ -1,5 +1,6 @@
 package a00959419.comp3717.bcit.ca.android;
 
+import android.content.Intent;
 import android.graphics.Rect;
 
 import java.util.ArrayList;
@@ -11,20 +12,23 @@ import java.util.ArrayList;
 public class Enemy extends Dino {
     Player player;
 
-    public Enemy (ScreenPlay.GameView gameView, Map map, ScreenPlay screen, Player player) {
+    public Enemy(ScreenPlay.GameView gameView, Map map, ScreenPlay screen, Player player) {
         super(gameView, map, R.drawable.t_rex, screen);
         movH = MovDirHorizontal.RIGHT;
         movV = MovDirVertical.DOWN;
         this.player = player;
-        walkSpeedPerSecond = SCREEN_WIDTH/12;
+        walkSpeedPerSecond = SCREEN_WIDTH / 12;
         xPosition = 0;
         yPosition = 0;
     }
 
     private void eat() {
-        if (Rect.intersects(new Rect((int)xPosition, (int)yPosition, (int)xPosition+MY_WIDTH, (int)yPosition + MY_HEIGHT),
-                new Rect((int)player.xPosition, (int)player.yPosition, (int)player.xPosition+MY_WIDTH, (int)player.yPosition + MY_HEIGHT)))
+        if (Rect.intersects(new Rect((int) xPosition, (int) yPosition, (int) xPosition + MY_WIDTH, (int) yPosition + MY_HEIGHT),
+                new Rect((int) player.xPosition, (int) player.yPosition, (int) player.xPosition + MY_WIDTH, (int) player.yPosition + MY_HEIGHT))) {
             screen.finish();
+            Intent intent = new Intent(screen.getApplicationContext(), ScreenGameOver.class);
+            screen.startActivity(intent);
+        }
     }
 
     @Override

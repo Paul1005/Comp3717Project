@@ -33,7 +33,7 @@ public class ScreenMain extends AppCompatActivity {
 
     public void buttonPlayClick(View view) {
         soundFX.start();
-        Intent play = new Intent(ScreenMain.this, ScreenPlay.class);
+        Intent play = new Intent(ScreenMain.this, ScreenLevelSelect.class);
         startActivity(play);
     }
 

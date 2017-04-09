@@ -52,8 +52,11 @@ public class ScreenPlay extends Activity {
             mediaPlayer.start();
         }
 
+        String level = getIntent().getStringExtra("level");
+        String trees = getIntent().getStringExtra("trees");
+
         try {
-            makeMap("lvl1.json", "lvl1_trees.json");
+            makeMap(level, trees);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -162,7 +165,7 @@ public class ScreenPlay extends Activity {
         @Override
         public void run() {
             while (playing) {
-                Log.d("fuck", "not paused");
+                Log.d("log", "not paused");
                 // Capture the current time in milliseconds in startFrameTime
                 long startFrameTime = System.currentTimeMillis();
 
