@@ -50,7 +50,7 @@ public class Map {
                 points[2 * j] = (float) ((((JSONArray) lineString.get(j)).getDouble(0) - minX) *
                                         (SCREEN_WIDTH / mapWidth) * 0.75 + SCREEN_WIDTH / 8);
                 points[2 * j + 1] = (float) ((((JSONArray) lineString.get(j)).getDouble(1) - minY) *
-                                        (SCREEN_HEIGHT / mapHeight) * 0.75 + SCREEN_HEIGHT / 8);
+                                        (SCREEN_HEIGHT / mapHeight) * 0.67 + SCREEN_HEIGHT / 6);
             }
 
             Rect rect = createRect(points);
@@ -67,7 +67,7 @@ public class Map {
             points[0] = (float) ((lineString.getDouble(0) - minX) * (SCREEN_WIDTH / mapWidth) *
                     0.75 + SCREEN_WIDTH / 8);
             points[1] = (float) ((lineString.getDouble(1) - minY) * (SCREEN_HEIGHT / mapHeight) *
-                    0.75 + SCREEN_HEIGHT / 8);
+                    0.67 + SCREEN_HEIGHT / 6);
             points[2] = 10;
 
             Rect circle = new Rect((int) points[0] - (int) points[2], (int) points[1] -
