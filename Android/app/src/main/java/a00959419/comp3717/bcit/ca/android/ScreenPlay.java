@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import static a00959419.comp3717.bcit.ca.android.ScreenMain.mediaPlayer;
 import static a00959419.comp3717.bcit.ca.android.ScreenMain.soundFX;
@@ -34,6 +35,7 @@ public class ScreenPlay extends Activity {
 
     Map map;
     Player player;
+    ArrayList<Enemy> enemies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,19 +52,36 @@ public class ScreenPlay extends Activity {
             mediaPlayer.start();
         }
 
+        String level = getIntent().getStringExtra("level");
+        String trees = getIntent().getStringExtra("trees");
+        String playerSpawn = getIntent().getStringExtra("player spawn");
+        String enemySpawns = getIntent().getStringExtra("enemy spawns");
+
         try {
-            makeMap("lvl1.json", "lvl1_trees.json");
+            makeMap(level, trees, playerSpawn, enemySpawns);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        player = new Player(gameView, map);
+        player = new Player(gameView, map, this, map.getPlayerSpawn().getX(),
+                map.getPlayerSpawn().getY());
+        for (Point spawnPoint : map.getEnemySpawns()) {
+            enemies.add(new Enemy(gameView, map, this, player, spawnPoint.getX(), spawnPoint.getY()));
+        }
     }
 
-    private void makeMap(String buildings, String trees) throws IOException, JSONException {
-        map = new Map(getJsonFromFile(buildings),  getJsonFromFile(trees));
+    @Override
+    public void onBackPressed() {
+        Intent play = new Intent(ScreenPlay.this, ScreenPaused.class);
+        startActivity(play);
+    }
+
+    private void makeMap(String buildings, String trees, String playerSpawn, String enemySpawns)
+            throws IOException, JSONException {
+        map = new Map(getJsonFromFile(buildings), getJsonFromFile(trees),
+                getJsonFromFile(playerSpawn), getJsonFromFile(enemySpawns));
     }
 
     private JSONArray getJsonFromFile(String jsonFile) throws IOException, JSONException {
@@ -153,7 +172,7 @@ public class ScreenPlay extends Activity {
         @Override
         public void run() {
             while (playing) {
-
+                Log.d("log", "not paused");
                 // Capture the current time in milliseconds in startFrameTime
                 long startFrameTime = System.currentTimeMillis();
 
@@ -176,7 +195,6 @@ public class ScreenPlay extends Activity {
                 if (timeThisFrame > 0) {
                     fps = 1000 / timeThisFrame;
                 }
-
             }
         }
 
@@ -185,6 +203,9 @@ public class ScreenPlay extends Activity {
         // In later projects we will have dozens (arrays) of objects.
         // We will also do other things like collision detection.
         public void update() {
+            for (Enemy enemy : enemies) {
+                enemy.updatePos(fps);
+            }
             player.updatePos(fps);
         }
 
@@ -201,7 +222,7 @@ public class ScreenPlay extends Activity {
 
                 // Draw the background color
                 //canvas.drawPicture();
-                canvas.drawColor(Color.argb(255, 255,248,220));
+                canvas.drawColor(Color.argb(255, 255, 248, 220));
 
                 // Choose the brush color for drawing
                 paint.setColor(Color.argb(255, 0, 0, 0));
@@ -211,12 +232,16 @@ public class ScreenPlay extends Activity {
                 paint.setTextSize(45);
 
                 // Display the current fps on the screen
-                //canvas.drawText("FPS:" + fps, 20, 40, paint);
+                canvas.drawText("FPS:" + fps, 20, 40, paint);
 
                 //map.display(canvas, paint);
                 map.display(canvas, paint);
-                //canvas.drawRect(0, 100, 100, 200 ,paint);
+
                 player.display(canvas, paint);
+
+                for (Enemy enemy : enemies) {
+                    enemy.display(canvas, paint);
+                }
 
                 // Draw everything to the screen
                 // and unlock the drawing surface
@@ -234,7 +259,7 @@ public class ScreenPlay extends Activity {
             } catch (InterruptedException e) {
                 Log.e("Error:", "joining thread");
             }
-
+            Log.d("fuck", "paused");
         }
 
         // If SimpleGameEngine Activity is started the

@@ -41,3 +41,9 @@ Android/app/app.iml
 Android/.gradle
 Android/.idea
 Android/app/proguard-rules.pro
+*.cpg
+*.prj
+*.shp
+*.shx
+*.qpj
+*.dbf

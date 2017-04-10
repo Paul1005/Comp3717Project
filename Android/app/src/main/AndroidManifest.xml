@@ -8,46 +8,51 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ScreenMain" android:screenOrientation="landscape" android:configChanges="orientation|keyboardHidden">
+        <activity
+            android:name=".ScreenMain"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:screenOrientation="landscape"
-            android:configChanges="orientation|keyboardHidden"
+        <activity
             android:name=".ScreenPaused"
-         />
-        <activity android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".ScreenPlay"
-            />
-        <activity android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".ScreenSettings"
-            />
-        <activity android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden"
-            android:name=".ScreenTutorial"/>
-        <activity android:screenOrientation="landscape"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ScreenTutorial"
             android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".ScreenDiscoveries"
-            />
-
-        <activity android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".ScreenDiscovery"
-         />
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape" />
 
-
-        <!--  <activity android:name=".ScreenDiscoveries"></activity>
+        <!--
+        <activity android:name=".ScreenDiscoveries"></activity>
         <activity android:name=".ScreenDiscovery"></activity>
         <activity android:name=".ScreenPaused"></activity>
         <activity android:name=".ScreenSettings"></activity>
         <activity android:name=".ScreenTutorial"></activity>
-        <activity android:name=".ScreenPlay"></activity> -->
+        <activity android:name=".ScreenPlay"></activity>
+        -->
+        <activity android:name=".ScreenLevelSelect" />
+        <activity android:name=".ScreenGameOver"></activity>
     </application>
 
 </manifest>
