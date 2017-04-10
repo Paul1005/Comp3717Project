@@ -8,6 +8,7 @@ import android.graphics.Rect;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  * Created by Andrew on 3/22/2017.
  */
 
-public class Map {
+class Map {
     private float maxX;
     private float maxY;
     private float minX;
@@ -25,18 +26,45 @@ public class Map {
 
     private ArrayList<Rect> buildings = new ArrayList<>();
     private ArrayList<Rect> trees = new ArrayList<>();
+    private Point playerSpawn = new Point();
+    private ArrayList<Point> enemySpawns = new ArrayList<>();
 
     private static final int SCREEN_HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
     private static final int SCREEN_WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
 
-    Map(JSONArray buildings, JSONArray trees) {
+    Map(JSONArray buildings, JSONArray trees, JSONArray playerSpawn, JSONArray enemySpawns) {
         try {
             minMax(buildings);
             initBuildings(buildings);
             initTrees(trees);
+            spawnPlayer(playerSpawn);
+            spawnEnemies(enemySpawns);
             //minMax(trees);
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void spawnPlayer(JSONArray playerSpawn) throws JSONException {
+        JSONArray lineString = playerSpawn.getJSONObject(0).getJSONArray("coordinates");
+
+        this.playerSpawn.setX((float) ((lineString.getDouble(0) - minX) * (SCREEN_WIDTH / mapWidth) *
+                0.75 + SCREEN_WIDTH / 8));
+        this.playerSpawn.setY((float) ((lineString.getDouble(1) - minY) * (SCREEN_HEIGHT / mapHeight) *
+                0.67 + SCREEN_HEIGHT / 6));
+    }
+
+    private void spawnEnemies(JSONArray enemySpawns) throws JSONException {
+        for (int i = 0; i < enemySpawns.length(); i++) {
+            JSONArray lineString = enemySpawns.getJSONObject(i).getJSONArray("coordinates");
+
+            Float x = (float) ((lineString.getDouble(0) - minX) * (SCREEN_WIDTH / mapWidth) *
+                    0.75 + SCREEN_WIDTH / 8);
+            Float y = (float) ((lineString.getDouble(1) - minY) * (SCREEN_HEIGHT / mapHeight) *
+                    0.67 + SCREEN_HEIGHT / 6);
+            Point enemySpawn = new Point(x, y);
+
+            this.enemySpawns.add(enemySpawn);
         }
     }
 
@@ -48,9 +76,9 @@ public class Map {
 
             for (int j = 0; j < 4; j++) {
                 points[2 * j] = (float) ((((JSONArray) lineString.get(j)).getDouble(0) - minX) *
-                                        (SCREEN_WIDTH / mapWidth) * 0.75 + SCREEN_WIDTH / 8);
+                        (SCREEN_WIDTH / mapWidth) * 0.75 + SCREEN_WIDTH / 8);
                 points[2 * j + 1] = (float) ((((JSONArray) lineString.get(j)).getDouble(1) - minY) *
-                                        (SCREEN_HEIGHT / mapHeight) * 0.67 + SCREEN_HEIGHT / 6);
+                        (SCREEN_HEIGHT / mapHeight) * 0.67 + SCREEN_HEIGHT / 6);
             }
 
             Rect rect = createRect(points);
@@ -161,5 +189,13 @@ public class Map {
 
     public ArrayList<Rect> getTrees() {
         return trees;
+    }
+
+    public Point getPlayerSpawn() {
+        return playerSpawn;
+    }
+
+    public ArrayList<Point> getEnemySpawns() {
+        return enemySpawns;
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by Andrew on 3/22/2017.
  */
 
-public class Player extends Dino{
+class Player extends Dino{
 
 
     private static final int LEFT_THRESHOLD = SCREEN_WIDTH / 5;
@@ -19,11 +19,12 @@ public class Player extends Dino{
 
     private int score = 0;
 
-    public Player(ScreenPlay.GameView gameView, Map map, ScreenPlay screen) {
-        super(gameView, map, R.drawable.dinosaur, screen);
+    Player(ScreenPlay.GameView gameView, Map map, ScreenPlay screen, float spawnXPos,
+                  float spawnYPos) {
+        super(gameView, map, R.drawable.dinosaur, screen, spawnXPos, spawnYPos);
     }
 
-    public void changeMove(MotionEvent motionEvent) {
+    void changeMove(MotionEvent motionEvent) {
         switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
 
             // Player has touched the screen

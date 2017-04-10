@@ -24,6 +24,8 @@ public class ScreenLevelSelect extends AppCompatActivity {
         String[] level = levelInfo.split(" ");
         play.putExtra("level",level[0]);
         play.putExtra("trees", level[1]);
+        play.putExtra("player spawn", level[2]);
+        play.putExtra("enemy spawns", level[3]);
         startActivity(play);
     }
 }

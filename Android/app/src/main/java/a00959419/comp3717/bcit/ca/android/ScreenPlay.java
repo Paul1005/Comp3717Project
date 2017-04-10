@@ -54,27 +54,34 @@ public class ScreenPlay extends Activity {
 
         String level = getIntent().getStringExtra("level");
         String trees = getIntent().getStringExtra("trees");
+        String playerSpawn = getIntent().getStringExtra("player spawn");
+        String enemySpawns = getIntent().getStringExtra("enemy spawns");
 
         try {
-            makeMap(level, trees);
+            makeMap(level, trees, playerSpawn, enemySpawns);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        player = new Player(gameView, map, this);
-        enemies.add(new Enemy(gameView, map, this, player));
+        player = new Player(gameView, map, this, map.getPlayerSpawn().getX(),
+                map.getPlayerSpawn().getY());
+        for (Point spawnPoint : map.getEnemySpawns()) {
+            enemies.add(new Enemy(gameView, map, this, player, spawnPoint.getX(), spawnPoint.getY()));
+        }
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         Intent play = new Intent(ScreenPlay.this, ScreenPaused.class);
         startActivity(play);
     }
 
-    private void makeMap(String buildings, String trees) throws IOException, JSONException {
-        map = new Map(getJsonFromFile(buildings),  getJsonFromFile(trees));
+    private void makeMap(String buildings, String trees, String playerSpawn, String enemySpawns)
+            throws IOException, JSONException {
+        map = new Map(getJsonFromFile(buildings), getJsonFromFile(trees),
+                getJsonFromFile(playerSpawn), getJsonFromFile(enemySpawns));
     }
 
     private JSONArray getJsonFromFile(String jsonFile) throws IOException, JSONException {
@@ -196,7 +203,9 @@ public class ScreenPlay extends Activity {
         // In later projects we will have dozens (arrays) of objects.
         // We will also do other things like collision detection.
         public void update() {
-            enemies.get(0).updatePos(fps);
+            for (Enemy enemy : enemies) {
+                enemy.updatePos(fps);
+            }
             player.updatePos(fps);
         }
 
@@ -213,7 +222,7 @@ public class ScreenPlay extends Activity {
 
                 // Draw the background color
                 //canvas.drawPicture();
-                canvas.drawColor(Color.argb(255, 255,248,220));
+                canvas.drawColor(Color.argb(255, 255, 248, 220));
 
                 // Choose the brush color for drawing
                 paint.setColor(Color.argb(255, 0, 0, 0));
@@ -227,8 +236,12 @@ public class ScreenPlay extends Activity {
 
                 //map.display(canvas, paint);
                 map.display(canvas, paint);
+
                 player.display(canvas, paint);
-                enemies.get(0).display(canvas, paint);
+
+                for (Enemy enemy : enemies) {
+                    enemy.display(canvas, paint);
+                }
 
                 // Draw everything to the screen
                 // and unlock the drawing surface

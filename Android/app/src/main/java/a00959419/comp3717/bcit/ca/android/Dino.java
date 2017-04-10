@@ -25,9 +25,8 @@ public class Dino {
 
     float walkSpeedPerSecond = SCREEN_WIDTH/10;
 
-    // He starts 10 pixels from the left
-    public float xPosition = SCREEN_WIDTH - MY_WIDTH - 150;
-    public float yPosition = SCREEN_HEIGHT - MY_HEIGHT - 150;
+    public float xPosition;
+    public float yPosition;
 
     // Declare an object of type Bitmap
     Bitmap bitmapBob;
@@ -38,12 +37,16 @@ public class Dino {
     Dino.MovDirHorizontal movH = Dino.MovDirHorizontal.NONE;
     Dino.MovDirVertical movV = Dino.MovDirVertical.NONE;
 
-    public Dino(ScreenPlay.GameView gameView, Map map, int imgid, ScreenPlay screen) {
+    public Dino(ScreenPlay.GameView gameView, Map map, int imgId, ScreenPlay screen, float spawnXPos,
+                float spawnYPos) {
         this.screen = screen;
 
-        bitmapBob = BitmapFactory.decodeResource(gameView.getResources(), imgid);
+        bitmapBob = BitmapFactory.decodeResource(gameView.getResources(), imgId);
 
         bitmapBob = Bitmap.createScaledBitmap(bitmapBob, MY_WIDTH, MY_HEIGHT, true);
+
+        xPosition = spawnXPos;
+        yPosition = spawnYPos;
 
         setBuildings(map.getBuildings());
         setTrees(map.getTrees());
