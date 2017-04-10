@@ -15,7 +15,7 @@ public class ScreenDiscoveries extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_discoveries);
+        setContentView(R.layout.activity_discovery);
     }
 
     public void buttonBackClick(View view) {

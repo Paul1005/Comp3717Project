@@ -34,4 +34,9 @@ public class ScreenPaused extends Activity{
         home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home);
     }
+    public void buttonRestart(View view){
+        soundFX.start();
+        Intent restart = new Intent(ScreenPaused.this,ScreenPlay.class);
+        startActivity(restart);
+    }
 }

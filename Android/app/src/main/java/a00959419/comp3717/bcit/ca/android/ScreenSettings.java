@@ -2,6 +2,7 @@ package a00959419.comp3717.bcit.ca.android;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.Switch;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.media.AudioManager;
+import android.widget.Toast;
+
 
 import com.esri.core.internal.tasks.ags.v;
 
@@ -24,7 +27,7 @@ public class ScreenSettings extends Activity {
     private SeekBar volumeSeekbar = null;
     private AudioManager audioManager = null;
     public static boolean mute = false;
-    public static MediaPlayer mp;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +83,31 @@ public class ScreenSettings extends Activity {
             e.printStackTrace();
         }
     }
+    public void stopmus(View view){
+        if(mediaPlayer != null){
+            mediaPlayer.stop();
+            mediaPlayer = null;
+        }
+        super.onStop();
+        Toast.makeText(ScreenSettings.this, "it works", Toast.LENGTH_SHORT).show();
+    }
 
+    public void playmus(View view){
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+        }
+        mediaPlayer = MediaPlayer.create(ScreenSettings.this, R.raw.menu);
+        mediaPlayer.setLooping(true);
+        if (!mute) {
+            mediaPlayer.start();
+        }
+        Toast.makeText(ScreenSettings.this, "It plays", Toast.LENGTH_SHORT).show();
+    }
+    public void aboutGame(View view){
+        Intent aboutGame = new Intent(ScreenSettings.this,ScreenDiscovery.class);
+        startActivity(aboutGame);
+
+    }
    /* private void controlVolume2()
     {
         try

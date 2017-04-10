@@ -31,19 +31,19 @@
         android:background="@drawable/button_settings"
         android:onClick="buttonSettingsClick"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/buttonBack"
-        android:layout_alignStart="@+id/buttonBack" />
+        android:layout_alignRight="@+id/titlePaused"
+        android:layout_alignEnd="@+id/titlePaused" />
 
     <Button
+        android:id="@+id/buttonRestart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonBack"
         android:background="@drawable/button_resume"
-        android:onClick="buttonBackClick"
-        android:layout_above="@+id/buttonSettings"
+        android:onClick="buttonRestart"
+        android:layout_alignBaseline="@+id/buttonBack"
+        android:layout_alignBottom="@+id/buttonBack"
         android:layout_alignRight="@+id/titlePaused"
-        android:layout_alignEnd="@+id/titlePaused"
-        android:layout_marginBottom="26dp" />
+        android:layout_alignEnd="@+id/titlePaused" />
 
     <Button
         android:id="@+id/buttonHome"
@@ -56,11 +56,11 @@
         android:onClick="buttonHomeClick" />
 
     <Button
+        android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonBack"
-        android:layout_alignBottom="@+id/buttonBack"
-        android:layout_alignLeft="@+id/titlePaused"
-        android:layout_alignStart="@+id/titlePaused"
         android:background="@drawable/button_back"
-        android:onClick="buttonBackClick" /></RelativeLayout>
+        android:onClick="buttonBackClick"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/titlePaused"
+        android:layout_alignStart="@+id/titlePaused" /></RelativeLayout>
