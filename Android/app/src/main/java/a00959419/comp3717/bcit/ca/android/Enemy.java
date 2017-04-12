@@ -23,7 +23,7 @@ class Enemy extends Dino {
         if (Rect.intersects(new Rect((int) xPosition, (int) yPosition, (int) xPosition + MY_WIDTH, (int) yPosition + MY_HEIGHT),
                 new Rect((int) player.xPosition, (int) player.yPosition, (int) player.xPosition + MY_WIDTH, (int) player.yPosition + MY_HEIGHT))) {
             screen.finish();
-            Intent intent = new Intent(screen.getApplicationContext(), EndGameOver.class);
+            Intent intent = new Intent(screen.getApplicationContext(), ScreenEndGame.class);
             intent.putExtra("status", "You Got Eaten");
             intent.putExtra("music", R.raw.gameover);
             screen.startActivity(intent);

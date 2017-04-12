@@ -55,7 +55,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="landscape" />
 
-        <activity android:name=".EndGameOver"
+        <activity android:name=".ScreenEndGame"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="landscape" />
 

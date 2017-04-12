@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_trans"
     android:screenOrientation="landscape"
-    tools:context="a00959419.comp3717.bcit.ca.android.EndGameOver">
+    tools:context="a00959419.comp3717.bcit.ca.android.ScreenEndGame">
 
     <Button
         android:id="@+id/button6"
