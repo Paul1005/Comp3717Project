@@ -99,12 +99,6 @@ public class ScreenPlay extends Activity {
         return jsonObject.getJSONArray("geometries");
     }
 
-    public void buttonPauseClick(View view) {
-        soundFX.start();
-        Intent paused = new Intent(ScreenPlay.this, ScreenPaused.class);
-        startActivity(paused);
-    }
-
     // This method executes when the player starts the game
     @Override
     protected void onResume() {

@@ -11,7 +11,7 @@ import static a00959419.comp3717.bcit.ca.android.ScreenMain.mediaPlayer;
 import static a00959419.comp3717.bcit.ca.android.ScreenMain.soundFX;
 import static a00959419.comp3717.bcit.ca.android.ScreenSettings.mute;
 
-public class ScreenGameOver extends AppCompatActivity {
+public class EndGameOver extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class ScreenGameOver extends AppCompatActivity {
             mediaPlayer.stop();
         }
 
-        mediaPlayer = MediaPlayer.create(ScreenGameOver.this, R.raw.gameover);
+        mediaPlayer = MediaPlayer.create(EndGameOver.this, getIntent().getIntExtra("music", -1));
         mediaPlayer.setLooping(false);
 
         if (!mute) {
@@ -37,7 +37,7 @@ public class ScreenGameOver extends AppCompatActivity {
 
     public void buttonHomeClick(View view) {
         soundFX.start();
-        Intent home = new Intent(ScreenGameOver.this, ScreenMain.class);
+        Intent home = new Intent(EndGameOver.this, ScreenMain.class);
         home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home);
     }
