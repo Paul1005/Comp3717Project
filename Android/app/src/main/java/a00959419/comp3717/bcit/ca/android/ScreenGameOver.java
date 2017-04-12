@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import static a00959419.comp3717.bcit.ca.android.ScreenMain.mediaPlayer;
 import static a00959419.comp3717.bcit.ca.android.ScreenMain.soundFX;
@@ -15,15 +16,23 @@ public class ScreenGameOver extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_screen_game_over);
+
         if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
+
         mediaPlayer = MediaPlayer.create(ScreenGameOver.this, R.raw.gameover);
         mediaPlayer.setLooping(false);
+
         if (!mute) {
             mediaPlayer.start();
         }
+
+        TextView textView = (TextView) findViewById(R.id.textView4);
+
+        textView.setText(getIntent().getStringExtra("status"));
     }
 
     public void buttonHomeClick(View view) {

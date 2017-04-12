@@ -1,5 +1,6 @@
 package a00959419.comp3717.bcit.ca.android;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 
@@ -61,6 +62,13 @@ class Player extends Dino{
         // then move him to the right based on his target speed and the current fps.
         super.updatePos(fps);
         eat();
+
+        if (trees.size() == 0) {
+            screen.finish();
+            Intent intent = new Intent(screen.getApplicationContext(), ScreenGameOver.class);
+            intent.putExtra("status", "You Won!");
+            screen.startActivity(intent);
+        }
     }
 
     private void eat() {
