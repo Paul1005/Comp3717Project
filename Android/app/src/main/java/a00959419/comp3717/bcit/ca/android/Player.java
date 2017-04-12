@@ -65,8 +65,9 @@ class Player extends Dino{
 
         if (trees.size() == 0) {
             screen.finish();
-            Intent intent = new Intent(screen.getApplicationContext(), ScreenGameOver.class);
+            Intent intent = new Intent(screen.getApplicationContext(), EndGameOver.class);
             intent.putExtra("status", "You Won!");
+            intent.putExtra("music", R.raw.victory);
             screen.startActivity(intent);
         }
     }
