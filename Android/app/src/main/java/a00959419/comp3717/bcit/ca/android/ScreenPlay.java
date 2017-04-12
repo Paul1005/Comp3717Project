@@ -172,7 +172,6 @@ public class ScreenPlay extends Activity {
         @Override
         public void run() {
             while (playing) {
-                Log.d("log", "not paused");
                 // Capture the current time in milliseconds in startFrameTime
                 long startFrameTime = System.currentTimeMillis();
 
@@ -259,7 +258,6 @@ public class ScreenPlay extends Activity {
             } catch (InterruptedException e) {
                 Log.e("Error:", "joining thread");
             }
-            Log.d("fuck", "paused");
         }
 
         // If SimpleGameEngine Activity is started the
