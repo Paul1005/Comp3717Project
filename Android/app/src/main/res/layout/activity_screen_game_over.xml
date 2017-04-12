@@ -24,7 +24,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/button6"
         android:layout_alignParentTop="true"
-        android:text="Game Over"
+        android:text=""
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="90sp" />

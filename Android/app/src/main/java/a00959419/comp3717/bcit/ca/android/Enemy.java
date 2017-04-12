@@ -26,6 +26,7 @@ class Enemy extends Dino {
                 new Rect((int) player.xPosition, (int) player.yPosition, (int) player.xPosition + MY_WIDTH, (int) player.yPosition + MY_HEIGHT))) {
             screen.finish();
             Intent intent = new Intent(screen.getApplicationContext(), ScreenGameOver.class);
+            intent.putExtra("status", "You Got Eaten");
             screen.startActivity(intent);
         }
     }
