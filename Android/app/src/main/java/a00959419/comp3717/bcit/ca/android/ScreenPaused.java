@@ -19,6 +19,8 @@ public class ScreenPaused extends Activity{
     }
 
     public void buttonBackClick(View view) {
+
+        soundFX.start();
         finish();
     }
 

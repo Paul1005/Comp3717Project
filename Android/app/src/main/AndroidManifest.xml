@@ -51,8 +51,14 @@
         <activity android:name=".ScreenTutorial"></activity>
         <activity android:name=".ScreenPlay"></activity>
         -->
-        <activity android:name=".ScreenLevelSelect" />
-        <activity android:name=".ScreenGameOver"></activity>
+        <activity android:name=".ScreenLevelSelect"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape" />
+
+        <activity android:name=".ScreenGameOver"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape" />
+
     </application>
 
 </manifest>

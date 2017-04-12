@@ -84,15 +84,17 @@ public class ScreenSettings extends Activity {
         }
     }
     public void stopmus(View view){
+        soundFX.start();
         if(mediaPlayer != null){
             mediaPlayer.stop();
             mediaPlayer = null;
         }
         super.onStop();
-        Toast.makeText(ScreenSettings.this, "it works", Toast.LENGTH_SHORT).show();
+      // Toast.makeText(ScreenSettings.this, "it works", Toast.LENGTH_SHORT).show();
     }
 
     public void playmus(View view){
+        soundFX.start();
         if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
@@ -101,92 +103,19 @@ public class ScreenSettings extends Activity {
         if (!mute) {
             mediaPlayer.start();
         }
-        Toast.makeText(ScreenSettings.this, "It plays", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(ScreenSettings.this, "It plays", Toast.LENGTH_SHORT).show();
     }
     public void aboutGame(View view){
+        soundFX.start();
         Intent aboutGame = new Intent(ScreenSettings.this,ScreenDiscovery.class);
         startActivity(aboutGame);
 
     }
-   /* private void controlVolume2()
-    {
-        try
-        {
-            volumeSeekbar = (SeekBar)findViewById(R.id.seekBar2);
-            audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-            volumeSeekbar.setMax(audioManager
-                    .getStreamMaxVolume(AudioManager.STREAM_MUSIC));
-            volumeSeekbar.setProgress(audioManager
-                    .getStreamVolume(AudioManager.STREAM_MUSIC));
 
-
-            volumeSeekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener()
-            {
-                @Override
-                public void onStopTrackingTouch(SeekBar arg0)
-                {
-                }
-
-                @Override
-                public void onStartTrackingTouch(SeekBar arg0)
-                {
-                }
-
-                @Override
-                public void onProgressChanged(SeekBar arg0, int progress, boolean arg2)
-                {
-                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-                            progress, 0);
-                }
-
-            });
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void controlVolume3()
-    {
-        try
-        {
-            volumeSeekbar = (SeekBar)findViewById(R.id.seekBar3);
-            audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-            volumeSeekbar.setMax(audioManager
-                    .getStreamMaxVolume(AudioManager.STREAM_MUSIC));
-            volumeSeekbar.setProgress(audioManager
-                    .getStreamVolume(AudioManager.STREAM_MUSIC));
-
-
-            volumeSeekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener()
-            {
-                @Override
-                public void onStopTrackingTouch(SeekBar arg0)
-                {
-                }
-
-                @Override
-                public void onStartTrackingTouch(SeekBar arg0)
-                {
-                }
-
-                @Override
-                public void onProgressChanged(SeekBar arg0, int progress, boolean arg2)
-                {
-                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-                            progress, 0);
-                }
-
-            });
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    } */
 
 
     public void buttonBackClick(View view) {
+        soundFX.start();
         finish();
     }
 }
