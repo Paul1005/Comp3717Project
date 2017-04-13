@@ -34,24 +34,8 @@ public class ScreenSettings extends Activity {
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         setContentView(R.layout.activity_settings);
 
-
-
         controlVolume();
-       // controlVolume2();
-        //controlVolume3();
     }
-
-    /*public void onMute(View view) {
-        soundFX.start();
-        Switch onOffSwitch = (Switch)view;
-        if(onOffSwitch.isChecked()){
-            mediaPlayer.pause();
-            mute = true;
-        }else{
-            mediaPlayer.start();
-            mute = false;
-        }
-    } */
 
     private void controlVolume() {
         try {
@@ -84,35 +68,21 @@ public class ScreenSettings extends Activity {
         }
     }
     public void stopmus(View view){
-        soundFX.start();
-        if(mediaPlayer != null){
-            mediaPlayer.stop();
-            mediaPlayer = null;
-        }
-        super.onStop();
-      // Toast.makeText(ScreenSettings.this, "it works", Toast.LENGTH_SHORT).show();
+        volumeSeekbar = (SeekBar) findViewById(R.id.seekBar1);
+        volumeSeekbar.setProgress(0);
     }
 
     public void playmus(View view){
-        soundFX.start();
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
-        }
-        mediaPlayer = MediaPlayer.create(ScreenSettings.this, R.raw.menu);
-        mediaPlayer.setLooping(true);
-        if (!mute) {
-            mediaPlayer.start();
-        }
-       // Toast.makeText(ScreenSettings.this, "It plays", Toast.LENGTH_SHORT).show();
+        volumeSeekbar = (SeekBar) findViewById(R.id.seekBar1);
+        volumeSeekbar.setProgress(100);
     }
+
     public void aboutGame(View view){
         soundFX.start();
         Intent aboutGame = new Intent(ScreenSettings.this,ScreenDiscovery.class);
         startActivity(aboutGame);
 
     }
-
-
 
     public void buttonBackClick(View view) {
         soundFX.start();
